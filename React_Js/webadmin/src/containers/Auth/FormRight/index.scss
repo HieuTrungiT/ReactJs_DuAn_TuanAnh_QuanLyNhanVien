@@ -1,0 +1,55 @@
+.Background-full-right {
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 20px 0px 0px 20px;
+
+    @media (max-width: 800px) {
+        margin-top: 50px;
+    }
+
+    .content-list {
+        padding: 84px 20% 40px 10%;
+        text-align: left;
+
+        @media (max-width: 800px) {
+            padding: 20px 20% 20px 10%;
+        }
+
+        h2 {
+            color: #FE9134;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        p {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+        }
+
+        .label-form {
+            font-weight: 500;
+            color: #3ea154;
+        }
+
+        .label-form-chinh-sach {
+            font-weight: bold;
+            color: #3ea154;
+        }
+
+        .login-form-button {
+            width: 100%;
+            background: #3ea154;
+            border: #3ea154;
+
+            :hover {
+                background: #3ea154;
+                border: #3ea154;
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+.Bg-manageAccountStatistical {
+    height: 500px;
+    overflow: auto;
+    padding: 0 16px;
+    border: 1px solid rgba(140, 140, 140, 0.35);
+    overflow-y: scroll;
+    background-color: white;
+
+    .statistical_manage_account {
+        color: rgba(27, 126, 27, 0.682);
+        font-weight: bold;
+    }
+}
+.label-breadcrumb{
+    background: #F0F2F5;
+}

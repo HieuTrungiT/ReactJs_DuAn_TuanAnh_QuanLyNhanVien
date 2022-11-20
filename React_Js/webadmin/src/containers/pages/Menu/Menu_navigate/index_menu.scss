@@ -1,0 +1,23 @@
+.ant-menu > .ant-menu-item:hover,
+.ant-menu > .ant-menu-submenu:hover,
+.ant-menu > .ant-menu-item-active,
+.ant-menu> .ant-menu-submenu-active,
+.ant-menu > .ant-menu-item-open,
+.ant-menu> .ant-menu-submenu-open,
+.ant-menu > .ant-menu-item-selected,
+.ant-menu > .ant-menu-submenu-selected {
+  // color: #3ea154;
+  border-bottom: 2px solid #1890FF;
+}
+.ant-menu-slide{
+  overflow-y: auto;
+  height: 100vh;
+  // position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding-top: 62px;
+}
+.ant-menu-slide::-webkit-scrollbar {
+  display: none;
+}

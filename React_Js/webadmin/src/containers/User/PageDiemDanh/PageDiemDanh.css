@@ -1,0 +1,373 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;@200;@300;500;700&display=swap');
+@keyframes mymove {
+    to {top: 0px;}
+    from {top: -20px;}
+  
+  }
+.containers-page_diem_danh  .alert {
+    animation: mymove 0.25s linear;
+}
+
+.containers-page_diem_danh {
+    width: 100%;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    padding: 50px;
+    overflow: overlay;
+}
+
+.containers-page_diem_danh .containers {
+    background: rgba(217, 217, 217, 0.14);
+    border-radius: 24px;
+    padding: 42px;
+}
+
+.containers-page_diem_danh .containers .containers-formDiemDanh {
+    /* Null */
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .title-text {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    color: #A162F7;
+    font-family: 'Inter', sans-serif;
+
+    text-align: left;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh {
+    /* height: 235px; */
+
+    margin: 26px 0px 30px 0px;
+    background: #DDEBFF;
+    border-radius: 24px;
+    padding: 25px;
+
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .header-formDiemDanh {
+    display: flex;
+    justify-content: space-between;
+margin-bottom: 15px;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .header-formDiemDanh .header-left {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    color: #3868A9;
+    font-family: 'Inter', sans-serif;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .header-formDiemDanh .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .header-formDiemDanh .header-right p {
+    margin: 0px;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .header-formDiemDanh .header-right .status-diemDanh {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50px;
+    margin-left: 10px;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-leftInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-leftInfo .content-date {
+    display: flex;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 31px;
+    color: #FFFFFF;
+    width: 200px;
+    height: 43px;
+    background: #549CFD;
+    box-shadow: 0px 2px 7px rgba(91, 91, 91, 0.04);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-leftInfo .content-uploadImage {
+    width: 200px;
+    height: 50px;
+    margin-top: 10px;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: #A162F7;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 31px;
+    color: #FFFFFF;
+
+}
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-leftInfo .content-uploadImage {
+    color: transparent;
+  }
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-leftInfo .content-uploadImage::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-leftInfo .content-uploadImage::before {
+    content: 'UPLOAD IMAGE';
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    /* border: 1px solid #999; */
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    text-align: center;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-leftInfo .content-uploadImage:hover::before {
+    border-color: black;
+  }
+  .containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-leftInfo .content-uploadImage :active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-rightIpt {
+    margin: 0px 25px 0px 25px;
+    width: 100%;
+
+}
+
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-rightIpt textarea {
+    text-align: left;
+    padding: 5px;
+    background: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #343434;
+    border-radius: 10px;
+}
+
+.containers-page_diem_danh .containers .container-formDiemDanh .formDiemDanh .content-formDiemDanh .content-btnDiemDanh {
+    background: #FFC430;
+    border-radius: 10px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    line-height: 29px;
+    color: #FFFFFF;
+
+}
+
+/********************* Form điểm danh *********************/
+.containers-page_diem_danh .containers .container-formXinVang {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.containers-page_diem_danh .containers .formXinVangInfo {
+    background: #FF5F5F;
+    border-radius: 24px;
+    width: calc(100% - 250px);
+    padding: 20px;
+    display: flex;
+}
+
+.containers-page_diem_danh .containers .formXinVangInfo .content-left{
+    width: 50%;
+
+}
+.containers-page_diem_danh .containers .formXinVangInfo .content-left .content-headerInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 39px;
+    padding: 0px 3px 10px 10px;
+/* identical to box height */
+font-family: 'Inter', sans-serif;
+
+
+color: #FFFFFF;
+
+}
+.containers-page_diem_danh .containers .formXinVangInfo .content-left .content-headerInfo .content-contai-date{
+
+}
+.containers-page_diem_danh .containers .formXinVangInfo .content-left .content-headerInfo .content-contai-date .content-date{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 31px;
+    color: #FFFFFF;
+}
+.containers-page_diem_danh .containers .formXinVangInfo .content-left .content-headerInfo .content-contai-date .content-date .content-dateTo{
+ margin-left: 12px;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 31px;
+    color: #FFFFFF;
+    width: 165px;
+    height: 43px;
+    background: #549CFD;
+    box-shadow: 0px 2px 7px rgba(91, 91, 91, 0.04);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.containers-page_diem_danh .containers .formXinVangInfo .content-left .content-headerInfo .content-contai-date .content-date .content-dateFrom{
+    padding: 6px 12px;
+    margin-left: 12px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 31px;
+    color: #FFFFFF;
+    width: 165px;
+    height: 43px;
+    background: #549CFD;
+    box-shadow: 0px 2px 7px rgba(91, 91, 91, 0.04);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.containers-page_diem_danh .containers .formXinVangInfo .content-left .ipt-banCamDoan{
+    text-align: left;
+    padding: 5px;
+    background: #FFFFFF;
+    border: 1px solid #343434;
+    max-height: 102px;
+    border-radius: 10px;
+}
+.containers-page_diem_danh .containers .formXinVangInfo .ipt-banLyDo{
+    text-align: left;
+    padding: 5px;
+    height: 217px;
+    width: 50%;
+    max-height: 220px;
+    font-family: 'Inter', sans-serif;
+    background: #FFFFFF;
+    margin-left: 10px;
+    border: 1px solid #343434;
+    border-radius: 10px;
+}
+.containers-page_diem_danh .containers .btn-formXinVang {
+    min-height: 150px;
+
+    border-radius: 24px;
+    width: 220px;
+    background: #FF5F5F;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+    line-height: 29px;
+    color: #FFFFFF;
+}
+
+/********************** Form xin vắng **********************/
+.containers-page_diem_danh .containers .container-formBangCong {
+    margin-top: 50px;
+    /* Null */
+}
+
+.containers-page_diem_danh .containers .container-formBangCong .title-text {
+    font-style: normal;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    color: #A162F7;
+    text-align: left;
+}
+
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong {
+    width: 100%;
+}
+
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .thead {
+    display: grid;
+    width: 100%;
+    grid-template-columns:33.3% 33.3% 33.3%;
+    padding: 10px 0px 10px 0px;
+
+}
+
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .thead th {
+    font-weight: 500;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    line-height: 24px;
+    color: #8D8D8D;
+    display: flex;
+    justify-content: center;
+}
+
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong {
+    padding: 5px;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+}
+
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .tbody {
+    width: 100%;
+}
+
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .tbody .tbody-element {
+    border-top: 1px solid #CDCDCD;
+    display: grid;
+    width: 100%;
+    grid-template-columns:33.3% 33.3% 33.3%;
+   
+    padding: 10px 0px 10px 0px;
+    justify-content: space-between;
+}
+
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .tbody .tbody-element td {
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    line-height: 24px;
+    color: #0e0e0e;
+    display: flex;
+    justify-content: center;
+}
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .tbody .tbody-element .status_OK {
+    color: #19B131;
+}
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .tbody .tbody-element .status_Fail {
+    color: #FF5F5F;
+}
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .tbody .tbody-element .accuracy_Waiting {
+    color: #FFC430;
+}
+.containers-page_diem_danh .containers .container-formBangCong .formBangCong .tbody .tbody-element .accuracy_Confirm {
+    color: #19B131;
+}
+/********************** Form bảng công **********************/

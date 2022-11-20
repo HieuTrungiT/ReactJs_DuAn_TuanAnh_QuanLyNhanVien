@@ -1,0 +1,28 @@
+.content-updateprofile {
+    background-color: white;
+    border-radius: 3px;
+    padding: 25px 10px;
+
+    .form-col {
+        justify-content: space-around;
+
+        .input_gender {
+            width: 100%,
+        }
+
+        .btn-success{
+            padding: 2px 50px 10px 50px;
+            display: flex;
+            text-align: center;
+        }
+    }
+    
+    .form-coles{
+        justify-content: flex-start;
+    }
+}
+
+.label-breadcrumb {
+    margin: 16px 0;
+    font-size: 16px;
+}

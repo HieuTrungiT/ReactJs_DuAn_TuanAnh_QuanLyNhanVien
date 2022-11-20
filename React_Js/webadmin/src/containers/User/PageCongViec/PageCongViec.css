@@ -1,0 +1,120 @@
+.containers-page_cong_viec {
+    width: 100%;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    padding: 50px;
+    overflow: overlay;
+}
+
+.containers-page_cong_viec .containers {
+    background: rgba(217, 217, 217, 0.14);
+    border-radius: 24px;
+    padding: 42px;
+}
+.containers-page_cong_viec .containers .contai-form {
+    margin-bottom: 50px;
+}
+.containers-page_cong_viec .containers .contai-form .title-form {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    text-align: left;
+    color: #A162F7;
+
+}
+.containers-page_cong_viec .containers .contai-form .title-slow_work{
+    color: #FFC430;
+}
+.containers-page_cong_viec .containers .contai-form .title-over_work {
+
+
+color: #FF424F;}
+
+.containers-page_cong_viec .containers .contai-form .form-body {
+    background: #EFEFEF;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.containers-page_cong_viec .containers .contai-form .form-body .thead {
+    display: grid;
+    grid-template-columns:19% 19% 19% 19% 19% 5%;
+    margin: 10px;
+}
+
+.containers-page_cong_viec .containers .contai-form .form-body .thead th {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    color: #8D8D8D;
+}
+
+.containers-page_cong_viec .containers .contai-form .form-body .tbody {
+
+    margin: 10px;
+}
+
+.containers-page_cong_viec .containers .contai-form .form-body .tbody .tbody-element {
+    border-top: 1px solid #CDCDCD;
+    display: grid;
+    position: relative;
+    cursor: pointer;
+    grid-template-columns: 19% 19% 19% 19% 19% 5%;
+}
+.containers-page_cong_viec .containers .contai-form .form-body .tbody .tbody-element:hover{
+    background-color: #e2e2e2;
+}
+
+.containers-page_cong_viec .containers .contai-form .form-body .tbody .tbody-element td {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    color: #454545;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containers-page_cong_viec .containers .contai-form .form-body .tbody .tbody-element .btn_showDetails {
+   cursor: pointer;
+}
+
+.containers-page_cong_viec .containers .contai-form .form-body .tbody .tbody-element .btn_showDetails :hover {
+    background-color: #cacaca;
+    border-radius: 50px;
+}
+
+.containers-page_cong_viec .containers .contai-form .form-body .tbody .tbody-element td .box-color_status {
+    background-color: #4F46BA;
+    width: 22px;
+    height: 22px;
+    margin: 0 auto;
+}
+
+.containers-page_cong_viec .containers .contai-form .annontation_table {
+    float: right;
+    margin-top: 10px;
+    display: flex;
+}
+
+.containers-page_cong_viec .containers .contai-form .annontation_table .annontation_element {
+    margin-left: 15px;
+    display: flex;
+}
+
+.containers-page_cong_viec .containers .contai-form .annontation_table .annontation_element .content-annonttation {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    margin-right: 8px;
+    color: #8D8D8D;
+}
+
+.containers-page_cong_viec .containers .contai-form .annontation_table .annontation_element .box-color_annontation {
+    width: 15px;
+    height: 15px;
+}

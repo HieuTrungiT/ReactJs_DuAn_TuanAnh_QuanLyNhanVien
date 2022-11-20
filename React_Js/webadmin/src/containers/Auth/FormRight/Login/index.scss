@@ -1,0 +1,40 @@
+.label-form-bg {
+    background-color: white;
+    .label-form {
+        font-weight: 500;
+        color: #3ea154;
+    }
+
+    .label-form-chinh-sach {
+        font-weight: bold;
+        color: #3ea154;
+    }
+
+    .login-form-button {
+        width: 100%;
+        background: #3ea154;
+        border: #3ea154;
+
+        :hover {
+            background: #3ea154;
+            border: #3ea154;
+        }
+    }
+
+    .check_flex {
+        position: relative;
+        .check_flex_left {
+            flex: 1;
+            left: 0px;
+            top:0px;
+            position: absolute;
+        }
+
+        .check_flex_right {
+            flex: 1;
+            right: 0px;
+            position: absolute;
+            top:0px;
+        }
+    }
+}

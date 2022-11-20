@@ -1,0 +1,24 @@
+.Bg-ForgetAccount {
+    height: 500px;
+    overflow: auto;
+    padding: 0 16px;
+    border: 1px solid rgba(140, 140, 140, 0.35);
+
+    .ForgetAccount {
+        color: rgb(111, 99, 51);
+        padding: 4px 16px;
+        background-color: rgb(228, 228, 228);
+        cursor: pointer;
+    }
+    .ForgetAccountDel {
+        color: rgb(255, 255, 255);
+        padding: 4px 16px;
+        background-color: rgb(255, 0, 0);
+        cursor: pointer;
+    }
+}
+
+.copyToClipBoardPw{
+    margin:  0 15px;
+    background-color: orange;
+}

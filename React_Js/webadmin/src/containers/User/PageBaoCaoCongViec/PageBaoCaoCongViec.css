@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:wght@300;500;700&display=swap');
+
+.containers-page_bao_cao_cong_viec {
+    width: 100%;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    padding: 50px;
+    overflow: overlay;
+}
+
+.containers-page_bao_cao_cong_viec .containers {
+    background: rgba(217, 217, 217, 0.14);
+    border-radius: 24px;
+    padding: 42px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .title-form {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    color: #A162F7;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+}
+
+/* Header status work */
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec {
+    margin-top: 50px;
+    border-bottom: 1px solid #E9EAEC
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    background: #EFEFEF;
+    border-radius: 10px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work .info-content-work {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work .info-content-work p {
+    margin: 0px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work .info-content-work .info-title {
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #343434;
+
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work .info-content-work .info-content {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: #6d6d6d;
+    margin-top: 5px;
+}
+
+
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work .info-timeOut-work {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work .info-timeOut-work p {
+    margin: 0px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work .info-timeOut-work .info-title-timeOut {
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #343434;
+
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-info-work .info-timeOut-work .info-content-timeOut {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: #6d6d6d;
+    margin-top: 5px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: flex-start;
+
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work .status-left {}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work .status-left div {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work .status-left div p {
+    margin: 0px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work .status-left .status-title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #454545;
+    margin-right: 5px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work .status-right {
+    display: flex;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work .status-right .annontation_element {
+    display: flex;
+    align-items: center;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work .status-right .annontation_element .content-annonttation {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    margin: 0px;
+    font-size: 12px;
+    line-height: 15px;
+    margin-left: 10px;
+    margin-right: 8px;
+    color: #8D8D8D;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-header_status-bao_cao_cong_viec .form-status-work .status-right .annontation_element .box-color_annontation {
+    height: 22px;
+    width: 22px;
+    border-radius: 50px;
+}
+
+/* Form infor entry */
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec {
+    margin: 40px 0px 40px 0px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .title-form-report {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    text-align: left;
+    /* primary/dark 1 */
+
+    color: #242731;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .lable-ipt-done-report {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 19px;
+    color: #7C7C8D;
+    text-align: left;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .ipt-done-report {
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    text-align: left;
+    min-height: 100px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-form-input-todo-inprogress {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-form-input-todo-inprogress .contai-todo {
+    width: 49%;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-form-input-todo-inprogress .contai-todo .lable-ipt-todo-report{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 19px;
+    color: #7C7C8D;
+    text-align: left;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-form-input-todo-inprogress .contai-todo .ipt-todo-report{
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    text-align: left;
+    min-height: 100px;
+}
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-form-input-todo-inprogress .contai-inprogress {
+    width: 49%;
+}
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-form-input-todo-inprogress .contai-inprogress .lable-ipt-inprogress-report{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 19px;
+    color: #7C7C8D;
+    text-align: left;
+}
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-form-input-todo-inprogress .contai-inprogress .ipt-inprogress-report{
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    text-align: left;
+    min-height: 100px;
+}
+
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-questions-upload{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-questions-upload .contai-questions{
+    width: 49%;
+
+}
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-questions-upload .contai-questions .lable-ipt-questions-report{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 19px;
+    color: #7C7C8D;
+    text-align: left;
+}
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-questions-upload .contai-questions .ipt-questions-report{
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    text-align: left;
+    min-height: 50px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-questions-upload .contai-bnt-upload{
+    width: 49%;
+}
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-questions-upload .contai-bnt-upload  .lable-upload-file-report{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 19px;
+    color: #7C7C8D;
+    text-align: left;
+}
+.containers-page_bao_cao_cong_viec .containers .contai-info-entry-bao_cao_cong_viec .contai-questions-upload .contai-bnt-upload .content-upload-file{
+
+}
+/* button submit form */
+.containers-page_bao_cao_cong_viec .containers .contai-btn_submit-bao_cao_cong_viec {
+    border-top: 1px solid #E9EAEC;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-btn_submit-bao_cao_cong_viec .border-line {
+    height: 30px;
+    width: 1px;
+    background-color: #343434;
+    margin: 10px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-btn_submit-bao_cao_cong_viec div {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.containers-page_bao_cao_cong_viec .containers .contai-btn_submit-bao_cao_cong_viec div:hover {
+    background-color: #ededed;
+    border-radius: 5px;
+}
