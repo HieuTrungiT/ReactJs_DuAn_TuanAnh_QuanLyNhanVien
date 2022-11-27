@@ -15,6 +15,21 @@ export const ErrorRegister = () => {
   }, 1000);
 };
 
+
+export const Fasle_gr_listDetail = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Thông tin nhóm không tồn tại trên hệ thống',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
 export const ErrorAdd = () => {
   message.loading({
     content: 'Loading...',
@@ -23,6 +38,19 @@ export const ErrorAdd = () => {
   setTimeout(() => {
     message.error({
       content: 'Thất bại ! Tên dự án đã được sử dụng',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+export const ErrorAdds = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Tên nhóm đã tồn tại',
       key,
       duration: 2,
     });

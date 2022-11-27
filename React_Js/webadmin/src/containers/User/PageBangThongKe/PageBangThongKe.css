@@ -1,0 +1,123 @@
+.containers-page_thong_ke {
+    width: 100%;
+    margin: 0 auto;
+    font-family: "Inter", sans-serif;
+    padding: 50px;
+    overflow: overlay;
+}
+
+.containers-page_thong_ke .containers {
+    background: rgba(217, 217, 217, 0.14);
+    border-radius: 24px;
+    padding: 42px;
+}
+.containers-page_thong_ke .containers .title-text {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    text-align: left;
+    color: #a162f7;
+}
+.containers-page_thong_ke .containers .contais-from_header {
+    display: flex;
+    justify-content: space-between;
+}
+.containers-page_thong_ke .containers .contais-from_header .contai-chart_pie {
+    width: 65%;
+}
+.containers-page_thong_ke .containers .contais-from_header .contai-config_table_data {
+    width: 30%;
+    background: #ffffff;
+    border: 1px solid #4f46ba;
+    border-radius: 10px;
+    padding: 10px;
+}
+.containers-page_thong_ke .containers .contais-from_header .contai-config_table_data .contai-pick-show-date {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.containers-page_thong_ke .containers .contais-from_header .contai-config_table_data .contai-pick-show-date div {
+    padding: 10px 15px;
+    margin: 5px;
+    font-weight: bold;
+    background: #ffc248;
+    border-radius: 10px;
+    color: white;
+    font-size: 11px;
+}
+.containers-page_thong_ke
+    .containers
+    .contais-from_header
+    .contai-config_table_data
+    .contai-pick-show-time_form_to
+    .form-time_form_to {
+    margin: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.containers-page_thong_ke
+    .containers
+    .contais-from_header
+    .contai-config_table_data
+    .contai-pick-show-time_form_to
+    .form-time_form_to
+    p {
+    padding-left: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+
+    margin: 0px;
+    margin-top: 10px;
+    color: #7c7c8d;
+}
+.containers-page_thong_ke
+    .containers
+    .contais-from_header
+    .contai-config_table_data
+    .contai-pick-show-time_form_to
+    .form-time_form_to
+    input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+}
+
+.containers-page_thong_ke .containers .contais-from_header .contai-config_table_data .contai-pick-tag_group {
+    margin-top: 20px;
+}
+.containers-page_thong_ke
+    .containers
+    .contais-from_header
+    .contai-config_table_data
+    .contai-pick-tag_group
+    .form-list_tag
+    ul {
+    display: flex;
+    margin: 10px;
+    padding: 0px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.containers-page_thong_ke
+    .containers
+    .contais-from_header
+    .contai-config_table_data
+    .contai-pick-tag_group
+    .form-list_tag
+    ul
+    li {
+    margin: 5px;
+    padding: 10px;
+    background: #ebebeb;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    /* grid-column-end: span 2; */
+}

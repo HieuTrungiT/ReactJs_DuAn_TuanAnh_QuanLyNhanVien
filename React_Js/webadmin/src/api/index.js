@@ -1,6 +1,7 @@
 const api = 'http://localhost:3001/';
 const getAccountMe = 'getaccountme/';
 const getManagement = 'quanly/';
+const getGroupUser = 'getListManagerGr/';
 export const API_REGISTER = api + 'dangky';
 export const API_LOGIN = api + 'dangnhap';
 export const API_FORGOT_PW = api + 'quen-mat-khau';
@@ -28,3 +29,8 @@ export const API_ADD_PROJECT_MANAGEMENT = api + getManagement + 'them-quan-ly-lo
 export const API_DEL_PROJECT_MANAGEMENT = api + getManagement + 'xoa-quan-ly-loai-du-an';
 export const API_UPDATE_PROJECT_MANAGEMENT = api + getManagement + 'sua-quan-ly-loai-du-an';
 export const API_LIST_PROJECT_MANAGEMENT = api + getManagement + 'danh-sach-quan-ly-loai-du-an';
+export const API_GET_LIST_USER_LEADER = api + 'getListManagerGr';
+export const API_GET_LIST_USER_USER = api + 'getListManagerGrAccountUnlock';
+export const API_SET_ADD_GR = api + getGroupUser + 'them-nhom-moi';
+export const API_GET_DETAIL_GR = api + getGroupUser + 'chi-tiet-nhom';
+export const API_GET_LIST_GR_TYPE = api + 'getListGrType';

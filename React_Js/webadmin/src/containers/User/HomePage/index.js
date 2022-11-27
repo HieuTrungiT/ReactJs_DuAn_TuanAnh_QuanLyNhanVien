@@ -13,6 +13,9 @@ import {
 import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
 import HearderUser from "../../Admin/PageAdmin/Header/indexHeaderUser"
+import PageDiemDanh from "../../User/PageDiemDanh/PageDiemDanh"
+import PageCongViec from "../../User/PageCongViec/PageCongViec"
+import PageBaoCaoCongViec from "../../User/PageBaoCaoCongViec/PageBaoCaoCongViec"
 import {
   Link,
 } from "react-router-dom";
@@ -84,7 +87,6 @@ export default function HOME() {
           <div
             className="site-layout-background"
           >
-  
  
           </div>
         </Content>

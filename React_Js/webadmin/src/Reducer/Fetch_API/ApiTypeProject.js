@@ -58,10 +58,21 @@ export function getListTypeProject(dispatch) {
         });
 }
 
+export function getListDataGr(dispatch) {
+    axios.get(types.API_GET_LIST_GR_TYPE)
+        .then(response => {
+            dispatch(actions.getListGrSucc(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
 export function setAddTypeProjectForm({ dispatchAdditem, name }) {
     axios.post(types.API_ADD_PROJECT_MANAGEMENT, {
-        nameTypeProject : name,
-        timeRegister : DATE_TIME
+        nameTypeProject: name,
+        timeRegister: DATE_TIME
     })
         .then(response => {
             {
@@ -74,5 +85,69 @@ export function setAddTypeProjectForm({ dispatchAdditem, name }) {
         })
         .catch(error => {
             dispatchAdditem(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
+export function getListDataUserLeader(dispatchLeader) {
+    axios.get(types.API_GET_LIST_USER_LEADER)
+        .then(response => {
+            dispatchLeader(actions.getListUserLeaders(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatchLeader(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
+export function getListDataUserStaff(dispatchStaff) {
+    axios.get(types.API_GET_LIST_USER_USER)
+        .then(response => {
+            dispatchStaff(actions.getListUserStaffs(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatchStaff(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
+export function setAddGroupUser({ dispatch, values }) {
+    axios.post(types.API_SET_ADD_GR, values)
+        .then(response => {
+            {
+                response.data.success === true ?
+                    dispatch(actions.setAddProjectTypeManagementSucc(response.data))
+                    :
+                    dispatch(actions.setAddProjectTypeManagementFalsel(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
+export function upload({dispatchUpload, file}) {
+    const formData = new FormData();
+    formData.append('file', file);
+    axios.post(types.API_SET_DEL_AVATAR_ACCOUNT, formData)
+        .then(response => {
+            dispatchUpload(actions.UploadSucc(response.data))
+        })
+        .catch();
+}
+
+export function getDataDetailListGRMember({dispatch, slug}) {
+    axios.post(types.API_GET_DETAIL_GR , {slugs : slug})
+        .then(response => {
+            {
+                response.data?.success === false ?
+                    dispatch(actions.getListDetailsFalse(response.data))
+                    :
+                    dispatch(actions.getListDetailsSucc(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(actions.getListDetailsErr(error))
         });
 }

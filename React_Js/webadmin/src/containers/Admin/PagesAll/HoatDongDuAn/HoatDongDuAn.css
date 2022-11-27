@@ -1,0 +1,137 @@
+.body{
+margin: 0 auto;
+padding:0 auto;
+margin-top: 50px;
+background: rgb(226, 223, 223);
+
+}
+.bodyTT{
+    margin: 0 auto;
+    padding:0 auto;
+width: 1200px;
+height: 120px;
+
+}
+.bodyTTl{
+  
+float: left;
+
+}
+.bodyTTr{
+margin-top: 50px;
+    float: right;
+}
+
+
+
+
+
+
+/* Frm Them va hien thi san pham */
+.headerbang{
+width: 1300px;
+ height: 500px;
+
+}
+.boderHeaderbang{
+
+width: 1200px;
+height: 150px;
+margin-left: 30px;
+}
+.BccTime{
+width: 1200px;
+height: 30px;
+background-color:white;
+}
+.BccTimeL{
+    float: left;
+}
+ 
+.BccTimeR{
+    float: right;
+}
+
+.frmSpTD {
+    margin: 0;
+    padding: 0;
+    width: 1200px;
+    height: 50px;
+    background-color: white;
+   
+}
+.frmBoderColum{
+    width: 115px;
+    height: 50px;
+ 
+    text-align: center;
+    background: rgb(226, 223, 223);
+    border: solid  0.5px rgb(11, 11, 19);
+   
+}
+.frmBoderColum1{
+    width: 115px;
+    height: 50px;
+ 
+    text-align: center;
+    background: rgb(246, 245, 245);
+    border: solid  1px rgb(11, 11, 19);
+   
+}
+.frmSpTD p {
+    margin-top: 15px;
+ color: black;
+   
+}
+ 
+.frmSpTD li {
+    color: #f1f1f1;
+    display: inline-block;
+    width: 115px;
+ height: 31px;
+  
+}
+.frmBoderColumDA{
+    background: rgb(226, 223, 223);
+    border: solid 0.5px rgb(11, 11, 19);
+ 
+ float: left;
+ width: 280px;
+ height: 50px;
+}
+.frmBoderColumDA1{
+    background: rgb(254, 254, 254);
+    border: solid 0.5px rgb(11, 11, 19);
+ 
+ float: left;
+ width: 280px;
+ height: 50px;
+}
+.frmBoderColum button{
+    background: rgb(226, 223, 223);
+    width: 31px;
+    height: 31px; 
+    float: right;
+    margin-top: 18px;
+}
+.frmBoderColum img{
+    margin-top: 3px;
+    margin-left: -1px;
+width: 25px;
+height: 25px;
+
+
+}
+ 
+.btn-dell{
+ float: left;
+ margin-top: -35px;
+ margin-left: 60px;
+    width: 44px;
+    height: 36px;
+    border-radius: 49px;
+    background: rgb(212, 45, 45);
+
+
+
+}

@@ -13,7 +13,7 @@ import { Textarea } from 'react-bootstrap-icons';
 function PageDiemDanh() {
     const [dateToday, setDate] = useState();
     const [hoursNow, setHoursNow] = useState();
-    const [timeOut, setTimeOut] = useState(0); // set giá trị thời gian tan ca 
+    const [timeOut, setTimeOut] = useState(18); // set giá trị thời gian tan ca
     const [checkOut, setCheckOut] = useState(true);
     const [blNotOffDay, setBlNotOffDay] = useState(true);
     const [dateOffWorkTo, setDateOffWorkTo] = useState(null);
@@ -58,7 +58,7 @@ function PageDiemDanh() {
                                 });
                         } else {
                             const formdata = new FormData();
-            
+
                             formdata.append("file", mediaFile);
                             formdata.append("dateToday", dateToday);
                             formdata.append("notes", notes);

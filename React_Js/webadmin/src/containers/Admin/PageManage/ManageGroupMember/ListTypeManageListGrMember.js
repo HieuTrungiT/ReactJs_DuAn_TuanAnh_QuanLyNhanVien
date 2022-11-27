@@ -1,9 +1,21 @@
-import { Breadcrumb, Button } from 'antd';
+import { Breadcrumb } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import './ListTypeManageListGrMember.scss';
 import { Link } from "react-router-dom";
+import React, { useReducer, useEffect } from 'react';
+import { FullStateManagament } from '../../../../Reducer/InitReducer/Managament/indexManagament';
+import * as Reducer from '../../../../Reducer/Reducers/Managament/ProjectManagement';
+import * as typeAPI from '../../../../Reducer/Fetch_API/ApiTypeProject';
+import moment from 'moment';
+import * as date from '../../../../components/DateTime/DateTime';
+import { API_GET_URL_IMAGE } from '../../../../api/index';
 
 function ListTypeGrMem() {
+    const [state, dispatch] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament)
+    useEffect(() => {
+        typeAPI.getListDataGr(dispatch)
+    }, []);
+
     return (
         <>
             <Breadcrumb className='label-breadcrumb'>
@@ -13,54 +25,56 @@ function ListTypeGrMem() {
                     </Link>
                 </Breadcrumb.Item>
             </Breadcrumb>
+            {state?.dataGr?.length > 0 && state?.dataGr.map((value, index) => {
+                return (
+                    <article className="flex bg-white transition hover:shadow-xl mb-4" key={index}>
+                        <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
+                            <time
+                                datetime={`${moment(value.ngaytao).format(date.MOMENT_DATE)}`}
+                                className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900"
+                            >
+                                <span>{moment(value.ngaytao).format(date.MOMENT_DATE_YEAR)}</span>
+                                <span className="w-px flex-1 bg-gray-900/10"></span>
+                                <span>{moment(value.ngaytao).format(date.MOMENT_DATES)} tháng {moment(value.ngaytao).format(date.MOMENT_MONTH)}</span>
+                            </time>
+                        </div>
 
-            <article className="flex bg-white transition hover:shadow-xl">
-                <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
-                    <time
-                        datetime="2022-10-10"
-                        className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900"
-                    >
-                        <span>2022</span>
-                        <span className="w-px flex-1 bg-gray-900/10"></span>
-                        <span>Oct 10</span>
-                    </time>
-                </div>
+                        <div className="hidden sm:block sm:basis-56">
+                            <img
+                                alt="Guitar"
+                                src={API_GET_URL_IMAGE + value.image}
+                                className="aspect-square h-full w-full object-cover"
+                            />
+                        </div>
 
-                <div className="hidden sm:block sm:basis-56">
-                    <img
-                        alt="Guitar"
-                        src="https://images.unsplash.com/photo-1609557927087-f9cf8e88de18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                        className="aspect-square h-full w-full object-cover"
-                    />
-                </div>
+                        <div className="flex flex-1 flex-col justify-between">
+                            <div className="border-l border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+                                <a className="no-underline" href="#">
+                                    <h3 className="font-bold uppercase text-gray-900 ">
+                                        {value.tennhom}
+                                    </h3>
+                                </a>
 
-                <div className="flex flex-1 flex-col justify-between">
-                    <div className="border-l border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
-                        <a className="no-underline" href="#">
-                            <h3 className="font-bold uppercase text-gray-900 ">
-                                Finding the right guitar for your style - 5 tips
-                            </h3>
-                        </a>
+                                <p className="mt-2 text-sm leading-relaxed text-gray-700 line-clamp-3">
+                                    {value.mota}
+                                </p>
+                                <p className="mt-2 text-sm leading-relaxed text-gray-700 line-clamp-3">
+                                    Thời gian cập nhật gần nhất: {moment(value.newupdate).format(date.MOMENT_DATE_TIME_SURE)}
+                                </p>
+                            </div>
 
-                        <p className="mt-2 text-sm leading-relaxed text-gray-700 line-clamp-3">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-                            dolores, possimus pariatur animi temporibus nesciunt praesentium dolore
-                            sed nulla ipsum eveniet corporis quidem, mollitia itaque minus soluta,
-                            voluptates neque explicabo tempora nisi culpa eius atque dignissimos.
-                            Molestias explicabo corporis voluptatem?
-                        </p>
-                    </div>
-
-                    <div className="sm:flex sm:items-end sm:justify-end">
-                        <a
-                            href="#"
-                            className="no-underline block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
-                        >
-                            Read Blog
-                        </a>
-                    </div>
-                </div>
-            </article>
+                            <div className="sm:flex sm:items-end sm:justify-end">
+                                <Link
+                                    to={`/quan-ly-nhom/${value.slugs}`}
+                                    className="no-underline block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
+                                >
+                                    XEM CHI TIẾT
+                                </Link>
+                            </div>
+                        </div>
+                    </article>
+                )
+            })}
 
         </>
     );

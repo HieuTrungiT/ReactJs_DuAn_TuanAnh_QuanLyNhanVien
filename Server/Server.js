@@ -156,7 +156,6 @@ app.post("/dangnhap", (req, res) => {
 //Hiển thị thông tin tài khoản
 app.get('/showaccount', function (req, res) {
   con.query("SELECT * FROM `account` order by id desc", function (err, result, fields) {
-    // console.log(result);
     if (err) throw err;
     res.send(result);
   });
@@ -618,11 +617,11 @@ app.post("/quanly/sua-quan-ly-loai-du-an", (req, res) => {
   }
 });
 
+
 //Phần báo cáo
 //Show báo cáo
 app.get('/showwork', function (req, res) {
   con.query("SELECT * FROM `baocao` order by id desc", function (err, result, fields) {
-    // console.log(result);
     if (err) throw err;
     res.send(result);
   });
@@ -658,48 +657,61 @@ app.post('/deleteword', function (req, res) {
   });
 })
 
+//Quản Lý Nhóm
+app.get('/getListManagerGr', function (req, res) {
+  con.query("SELECT * FROM `account` WHERE chucvu = '" + "Giám đốc" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Trưởng phòng" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Phó giám đốc" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Quản lý" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Phó phòng" + "' AND lockacc = '" + "0" + "' order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+//Hiển thị thông tin tài khoản đã mở
+app.get('/getListManagerGrAccountUnlock', function (req, res) {
+  con.query("SELECT * FROM `account` Where lockacc = '" + " 0 " + "' order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+//Thêm Nhóm Mới
+app.post("/getListManagerGr/them-nhom-moi", (req, res, next) => {
+  const bodys = req.body;
+  var sql = "SELECT * FROM danhsachnhom WHERE tennhom= '" + bodys.namGroup + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      res.send({ success: false, message: "trung_ten" });
+    } else {
+      var sql = "INSERT INTO danhsachnhom ( slugs, tennhom, nguoiquanlyduan, image, nhanviennhom, mota, ngaytao, newupdate) values('" + bodys.slug + "' ,'" + bodys.namGroup + "' ,'" + bodys.LeaderGroup + "','" + bodys.avtatar + "','" + "[" + bodys.userGroup + "]" + "','" + bodys.commentGroup + "','" + bodys.date + "','" + bodys.date + "');"
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        res.send({ success: true });
+      });
+    }
+  });
+});
+//Chi tiết nhóm
+app.post("/getListManagerGr/chi-tiet-nhom", (req, res, next) => {
+  var sql = "SELECT * FROM danhsachnhom WHERE slugs= '" + req.body.slugs + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
 
-//Phần Công việc & Chấm Công
-//Show C.việc
-app.get('/showtaskmission', function (req, res) {
-  con.query("SELECT * FROM `congviec` order by id desc", function (err, result, fields) {
-    // console.log(result);
+  })
+});
+//Danh sách nhóm
+app.get('/getListGrType', function (req, res) {
+  con.query("SELECT * FROM `danhsachnhom` order by id desc", function (err, result, fields) {
     if (err) throw err;
     res.send(result);
   });
 });
 
-
-
-
-
-
-
-
-// lay congviec
-app.get('/viewwork/', (req, res) => {
-  var sql = "SELECT * FROM `work` ORDER BY iduser DESC ";
-  con.query(sql, function (err, result, fields) {
-    if (err) throw err;
-    // console.log(result);
-    res.send(result)
-  });
-})
-
-//thêm C.Việc
-app.post('/addwork', (req, res) => {
-
-
-  console.log(req.body);
-  // var sql = "insert into work ( workname,worktimestart,worktimeend,namegroup,workrate,workstatus,workfile) values('" + req.body.workname + "','" + req.body.worktimestart + "','" + req.body.worktimeend + "','" + req.body.namegroup + "','" + req.body.workrate + "','" + req.body.workstatus + "','" + req.body.workfile + "');";
-  // console.log(sql)
-  // con.query(sql, function (err, result, fields) {
-  //   if (err) throw err;
-  //   if (result.affectedRows == 1) {
-  //     res.send("ok")
-  //   }
-  // });
-})
 
 
 //Phần báo cáo
@@ -955,6 +967,9 @@ app.post('/updateReportWork', (req, res) => {
     }
   });
 })
+
+
+
 
 
 // ERR 404

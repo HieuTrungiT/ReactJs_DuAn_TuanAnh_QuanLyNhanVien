@@ -9,5 +9,10 @@ export const disabledDate = (current) => {
 };
 
 export const MOMENT_DATE = "YYYY-MM-DD";
+export const MOMENT_DATE_SURE = "DD-MM-YYYY";
+export const MOMENT_DATES = "DD";
+export const MOMENT_MONTH = "MM";
+export const MOMENT_DATE_YEAR = "YYYY";
 export const MOMENT_TIME = "HH:mm:ss";
 export const MOMENT_DATE_TIME = "YYYY-MM-DD HH:mm:ss";
+export const MOMENT_DATE_TIME_SURE = "DD-MM-YYYY HH:mm:ss";
