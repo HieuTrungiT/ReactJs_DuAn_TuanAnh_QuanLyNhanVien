@@ -271,7 +271,7 @@ function PageBangThongKe() {
 
                         </div>
                         <div className="contai-pick-show-time_form_to">
-                            {/* <div className="header-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div className="header-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <p className="title-time_form_to" style={{
                                     fontWeight: '500', margin: '0px', fontSize: '16px', lineHeight: '19px', color: '#000000',
                                 }}>Từ khoảng</p>
@@ -283,13 +283,13 @@ function PageBangThongKe() {
                                     color: '#549CFD',
                                     cursor: 'pointer'
                                 }}>Clear</p>
-                            </div> */}
-                            {/* <div className="form-time_form_to">
+                            </div>
+                            <div className="form-time_form_to">
                                 <p>Form</p>
                                 <input type="text" name="form" className="ipt-time_form" />
                                 <p>To</p>
                                 <input type="text" name="form" className="ipt-time_to" />
-                            </div> */}
+                            </div>
                         </div>
                         <div className="contai-pick-tag_group">
                             <div className="header-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

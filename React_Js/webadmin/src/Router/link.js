@@ -15,17 +15,21 @@ import ManageTypeProject from '../containers/Admin/PageManage/ManageTypeProject/
 import ListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/ListTypeManageListGrMember";
 import AddListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/AddListTypeManageListGrMember/AddListTypeManageListGrMember";
 import DetailListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/DetailListTypeManageListGrMember/DetailListTypeManageListGrMember";
-import {NaviLayout} from '../containers/Admin';
+import { NaviLayout } from '../containers/Admin';
 
 import ListPageDiemDanh from '../containers/User/PageDiemDanh/listPageDiemDanh';
 import PageCongViec from '../containers/User/PageCongViec/listPageCongViec';
 import PageBaoCaoCongViec from '../containers/User/PageBaoCaoCongViec/PageBaoCaoCongViec';
 import PageBangThongKe from "../containers/User/PageBangThongKe/PageBangThongke";
+import DanhSachDuAn from "../containers/Admin/PagesAll/BangChamCong/DanhSachDuAn";
+import DetailListReportUser from "../containers/Admin/Project/DetailListReportUser/DetailListReportUser";
+import DetailReportUser from "../containers/Admin/Project/DetailReportUser/DetailReportUser";
+import DetailProject from "../containers/Admin/Project/DetailProject/DetailProject";
 const publicRouter = [
     {
         path: "/",
         component: Home,
-        admins : false,
+        admins: false,
     },
     {
         path: "/*",
@@ -65,14 +69,14 @@ const publicRouter = [
 const AdminRoute = [
     {
         path: "/",
-        component : Admin,
-        admins : true,
+        component: Admin,
+        admins: true,
     },
     {
         path: "/*",
         component: NotFound,
         // layout : NaviLayout,
-        layout : null ,
+        layout: null,
 
     },
     {
@@ -104,6 +108,18 @@ const AdminRoute = [
         component: ManageAccount,
     },
     {
+        path: "/quan-ly-chi-tiet-bao-cao",
+        component: DetailProject,
+    },
+    {
+        path: "/quan-ly-danh-sach-bao-cao-du-an",
+        component: DetailListReportUser,
+    },
+    {
+        path: "/quan-ly-bao-cao-nhan-vien",
+        component: DetailReportUser,
+    },
+    {
         path: "/danh-sach-du-an",
         component: ListProject,
     },
@@ -132,7 +148,7 @@ const AdminRoute = [
 const AuthRoute = [
     {
         path: "/",
-        component : unAuth
+        component: unAuth
     },
     {
         path: "/*",
@@ -149,7 +165,7 @@ const AuthRoute = [
 ]
 
 export {
-    publicRouter ,
-    AdminRoute ,
+    publicRouter,
+    AdminRoute,
     AuthRoute
 }
