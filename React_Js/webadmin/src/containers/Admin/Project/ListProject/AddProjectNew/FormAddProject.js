@@ -72,6 +72,7 @@ const FormAddProject = () => {
             value: i.toString(36) + i,
         });
     }
+
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     };
@@ -93,12 +94,17 @@ const FormAddProject = () => {
             }
         },
     };
+    const checkData = ()=>{
+        console.log(stateItem);
+    }
     return (
         <>
+
             <Breadcrumb className='label-breadcrumb'>
                 <Breadcrumb.Item>TẠO DỰ ÁN MỚI</Breadcrumb.Item>
             </Breadcrumb>
             <div className='full-bg-form-add-project'>
+           <button onClick={()=>{checkData()}}></button>
                 <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish}>
                     <Row className='form-col'>
                         <Col lg={11} md={24} sm={24} xs={24}>

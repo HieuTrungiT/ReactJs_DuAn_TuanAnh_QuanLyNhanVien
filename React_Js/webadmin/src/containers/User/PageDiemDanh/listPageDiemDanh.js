@@ -26,7 +26,7 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
- 
+
 const items = [
   getItem('Thống Kê', '1', <AppstoreOutlined />),
   getItem('Nhân Viên', 'sub1', <UserOutlined />, [
@@ -52,8 +52,8 @@ export default function HOME() {
             paddingTop: '62px',
           }}
 
-        
-          // collapsible 
+
+          // collapsible
         >
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} onClick={e => console.log(e)} />
@@ -76,7 +76,7 @@ export default function HOME() {
 
         </Header>
 
-        
+
         <Content
           style={{
             margin: '70px 16px 10px 30vh',
@@ -85,7 +85,7 @@ export default function HOME() {
           <div
             className="site-layout-background"
           >
-     <PageDiemDanh/>
+          <PageDiemDanh/>
           </div>
         </Content>
         <Footer
@@ -93,7 +93,7 @@ export default function HOME() {
             textAlign: 'center',
           }}
         >
- 
+
         </Footer>
       </Layout>
       </div>
