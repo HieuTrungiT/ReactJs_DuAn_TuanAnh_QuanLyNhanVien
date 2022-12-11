@@ -13,7 +13,7 @@ import { Textarea } from 'react-bootstrap-icons';
 function PageDiemDanh() {
     const [dateToday, setDate] = useState();
     const [hoursNow, setHoursNow] = useState();
-    const [timeOut, setTimeOut] = useState(18); // set giá trị thời gian tan ca
+    const [timeOut, setTimeOut] = useState(17); // set giá trị thời gian tan ca
     const [checkOut, setCheckOut] = useState(true);
     const [blNotOffDay, setBlNotOffDay] = useState(true);
     const [dateOffWorkTo, setDateOffWorkTo] = useState(null);
