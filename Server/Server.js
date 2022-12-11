@@ -44,7 +44,7 @@ con.connect(function (err) {
 //Lưu hình ảnh vào file public/images và edit tên ảnh
 const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
-    callBack(null, 'public/images')  //Đường link uploads ảnh 
+    callBack(null, 'public/images')  //Đường link uploads ảnh
   },
   filename: (req, file, callBack) => {
     const myArray = file.originalname.split(".");
@@ -174,6 +174,7 @@ app.post('/getaccountme', function (req, res) {
 
   })
 });
+
 //Thời gian đăng nhập
 app.post('/new-login', function (req, res) {
   var sql = "UPDATE account SET timelogin = '" + req.body.datetime + "' where email = '" + req.body.email + "'";
@@ -184,7 +185,7 @@ app.post('/new-login', function (req, res) {
     }
   });
 });
-//Quên Mật Khẩu 
+//Quên Mật Khẩu
 app.post("/quen-mat-khau", (req, res) => {
   var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND lockacc = '" + '0' + "' ";
   con.query(sql, function (err, result, fields) {
@@ -230,7 +231,7 @@ app.post("/quen-mat-khau", (req, res) => {
   });
 });
 
-//Update avatar thông tin cá nhân 
+//Update avatar thông tin cá nhân
 app.post('/getaccountme/edituploadfile', upload.single('file'), (req, res, next) => {
   const file = req.file;
   const form = req.body;
@@ -258,7 +259,7 @@ app.post('/getaccountme/edituploadfile', upload.single('file'), (req, res, next)
     })
   }
 })
-//Del avatar thông tin cá nhân 
+//Del avatar thông tin cá nhân
 app.post('/getaccountme/deleteuploadfile', upload.single('file'), (req, res, next) => {
   const file = req.file;
   if (!file) {
@@ -288,7 +289,7 @@ app.post("/doi-mat-khau", (req, res) => {
     }
   });
 })
-//Search nhân viên 
+//Search nhân viên
 app.post('/search-staff', function (req, res) {
   var sql = "SELECT * FROM account WHERE email LIKE '" + req.body.name + `%` + "' or ten LIKE '" + req.body.name + `%` + "' or gioitinh LIKE '" + req.body.name + `%` + "' ";
   con.query(sql, function (err, result, fields) {
@@ -301,7 +302,7 @@ app.post('/search-staff', function (req, res) {
     }
   })
 });
-//Add User New Admin 
+//Add User New Admin
 app.post("/dangkyStaff", (req, res) => {
   const body = req.body;
   var sql = "SELECT * FROM account WHERE email= '" + body.emailstaff + "' ";
@@ -320,7 +321,7 @@ app.post("/dangkyStaff", (req, res) => {
     }
   });
 });
-//Ban account 
+//Ban account
 app.post("/ban-account", (req, res) => {
   const body = req.body;
   var sql = "SELECT * FROM account WHERE email= '" + body.email + "' ";
@@ -646,7 +647,7 @@ app.post('/editwork/editid', function (req, res) {
     }
   });
 })
-//Xoá Báo cáo 
+//Xoá Báo cáo
 app.post('/deleteword', function (req, res) {
   var sql = "delete from baocao where id = (" + req.body.id + ")";
   con.query(sql, function (err, result, fields) {
@@ -743,7 +744,7 @@ app.post('/editwork/editid', function (req, res) {
     }
   });
 })
-//Xoá Báo cáo 
+//Xoá Báo cáo
 app.post('/deleteword', function (req, res) {
   var sql = "delete from baocao where id = (" + req.body.id + ")";
   con.query(sql, function (err, result, fields) {
@@ -839,8 +840,8 @@ app.post("/uploadTimekeepingImage", upload.single("file", ""), (req, res, next) 
   }
   const data = req.body
   const nameImg = files.filename;
-console.log(data);
-console.log(nameImg);
+  console.log(data);
+  console.log(nameImg);
   var sql = "INSERT INTO `timekeepings`(`date`,`notes`,`nameImg`,`idUser`) VALUES ('" + data.dateToday + "','" + data.notes + "','" + nameImg + "','" + data.idUser + "')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
@@ -861,7 +862,7 @@ app.get('/getTimekeeping', function (req, res) {
     res.send(result);
   });
 });
-// OffWork 
+// OffWork
 app.post('/uploadOffWork', (req, res) => {
 
 
@@ -885,7 +886,13 @@ app.get('/getWorkUserTags', function (req, res) {
   });
 });
 
+app.get('/getWorks', function (req, res) {
 
+  con.query("SELECT * FROM `work_project` order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 // Work object to user
 app.get('/getWorkObjects', function (req, res) {
 
@@ -895,6 +902,22 @@ app.get('/getWorkObjects', function (req, res) {
   });
 });
 
+// get list work user tag where idWork
+app.get('/getWorkUserTagWhereIdWork', function (req, res) {
+
+  con.query("SELECT * FROM `work_users_tag` WHERE idWork = '" + req.query.idWork + "'order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.get('/getAccount', function (req, res) {
+
+  con.query("SELECT * FROM `account` WHERE id = " + req.query.idUser, function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
 // get work user tag where id
 app.get('/getWorkUserTag', function (req, res) {
@@ -905,7 +928,20 @@ app.get('/getWorkUserTag', function (req, res) {
   });
 });
 
-
+// get work_report where id User
+app.get('/getWorkReportWhereIdUser', function (req, res) {
+  con.query("SELECT * FROM `work_report` WHERE idUser = '" + req.query.idUser + "'order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+// get work_report where id
+app.get('/getWorkReportWhereId', function (req, res) {
+  con.query("SELECT * FROM `work_report` WHERE id = " + req.query.idReport, function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 // uploadReportWork
 app.post('/uploadReportWorkNoImage', (req, res) => {
 
@@ -938,7 +974,7 @@ app.post("/uploadReportImage", upload.single("file", ""), (req, res, next) => {
   const data = req.body
 
   const nameImg = files.filename;
-  var sql = "INSERT INTO `work_report`( `idWork`,`idWorkUserTag`, `dateReport`, `workDone`, `workInprogress`, `workToto`, `workQuestions`, `nameFile`) VALUES ('" + data.idWork + "','" + data.idWorkUserTag + "','" + data.dateReport + "','" + data.workDone + "','" + data.workInprogress + "','" + data.workToto + "','" + data.workQuestions + "','" + nameImg + "')";
+  var sql = "INSERT INTO `work_report`( `idUser`,`idWorkUserTag`, `dateReport`, `workDone`, `workInprogress`, `workToto`, `workQuestions`, `nameFile`) VALUES ('" + 17 + "','" + data.idWorkUserTag + "','" + data.dateReport + "','" + data.workDone + "','" + data.workInprogress + "','" + data.workToto + "','" + data.workQuestions + "','" + nameImg + "')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
