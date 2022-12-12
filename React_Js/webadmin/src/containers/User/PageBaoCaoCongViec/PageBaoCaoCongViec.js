@@ -46,11 +46,11 @@ function PageBaoCaoCongViec() {
         if (dateToday.getFullYear() >= dateDeadlinefrom.getFullYear()) {
             if (dateToday.getMonth() + 1 >= dateDeadlinefrom.getMonth() + 1) {
                 if (dateToday.getDate() >= dateDeadlinefrom.getDate()) {
-                    // kiểu tra dateToday > dateTo nếu có thì chậm tiến độ quá ngày 
+                    // kiểu tra dateToday > dateTo nếu có thì chậm tiến độ quá ngày
                     if (dateToday.getFullYear() <= dateDeadlineTo.getFullYear()) {
-                        // kiểu tra dateToday > dateTo nếu có thì chậm tiến độ quá ngày 
+                        // kiểu tra dateToday > dateTo nếu có thì chậm tiến độ quá ngày
                         if (dateToday.getMonth() + 1 <= dateDeadlineTo.getMonth() + 1) {
-                            // kiểu tra dateToday > dateTo nếu có thì chậm tiến độ quá ngày 
+                            // kiểu tra dateToday > dateTo nếu có thì chậm tiến độ quá ngày
                             if (dateToday.getDate() <= dateDeadlineTo.getDate()) {
                                 statusCheck = element.status == 1 ? 1 : 0;
                             } else {
@@ -119,13 +119,13 @@ function PageBaoCaoCongViec() {
     }
 
     const submidComplete = () => {
-      
+
 
         if (arrayWork.status != 1) {
           if( arrayWork.status != 3){
             if(file == ""){
                 axios.post('http://' + post + '/uploadReportWorkNoImage', {
-                    
+
                             data: {
                                 stateReport: 1,
                                 idWork:idWork,
@@ -137,17 +137,17 @@ function PageBaoCaoCongViec() {
                                 workQuestions: workQuestions,
                                 nameFile: "NO_NAME_FILE",
                             },file
-            
+
                         }).then(response => {
                             if (response.data = 'ok') {
                                 console.log("Upload successful");
-                                
+
                             alert("Báo cáo công việc thành công!")
                             }
                         });
             }else{
                 const formdata = new FormData();
-            
+
                 formdata.append("file", file);
                 formdata.append("stateReport", 1);
                 formdata.append("idWork",  idWork);
@@ -164,7 +164,7 @@ function PageBaoCaoCongViec() {
                 ).then(response => {
                     if (response.data = 'ok') {
                         console.log("Upload successful");
-                        
+
                     alert("Báo cáo công việc thành công!")
                     }
                 });
@@ -172,18 +172,18 @@ function PageBaoCaoCongViec() {
           }else{
             alert("Công việc đã Fail, không thể báo cáo, liên hệ với Admin!!")
           }
-            
+
         }else{
             alert("Công việc đã xong, không thể báo cáo hoàn tất!!")
         }
     }
     const submidReport = () => {
-  
- 
+
+
         if (arrayWork.status != 1) {
             if(file == ""){
                 axios.post('http://' + post + '/uploadReportWorkNoImage', {
-                    
+
                             data: {
                                 stateReport: arrayWork.status,
                                 idWork: idWork,
@@ -195,17 +195,17 @@ function PageBaoCaoCongViec() {
                                 workQuestions: workQuestions,
                                 nameFile: "NO_NAME_FILE",
                             },file
-            
+
                         }).then(response => {
                             if (response.data = 'ok') {
                                 console.log("Upload successful");
-                                
+
                             alert("Báo cáo công việc thành công!")
                             }
                         });
             }else{
                 const formdata = new FormData();
-            
+
                 formdata.append("file", file);
                 formdata.append("stateReport",  arrayWork.status);
                 formdata.append("idWork",  idWork);
@@ -222,14 +222,14 @@ function PageBaoCaoCongViec() {
                 ).then(response => {
                     if (response.data = 'ok') {
                         console.log("Upload successful");
-                        
+
                     alert("Báo cáo công việc thành công!")
                     }
                 });
             }
-        //     
-            
-            
+        //
+
+
         }else{
             alert("Công việc đã xong, không thể báo cáo tiến độ!!")
         }

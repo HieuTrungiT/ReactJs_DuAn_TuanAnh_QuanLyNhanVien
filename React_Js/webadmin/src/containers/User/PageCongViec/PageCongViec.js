@@ -12,7 +12,7 @@ function PageCongViec() {
 
     // Get list work user tag
     const getWorkUserTags = async () => {
-        const baseurl = 'http://' + post + '/getWorkUserTags/?idUser=17';
+        const baseurl = 'http://' + post + '/getWorkUserTags/?idUser=23';
         const response = await axios.get(baseurl);
         setListWorkUserTag(response.data);
         var listUserTags = response.data;

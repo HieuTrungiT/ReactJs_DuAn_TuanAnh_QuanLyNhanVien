@@ -6,6 +6,8 @@ import React, { useState, useRef, useReducer, useEffect } from 'react';
 import { FullStateManagament } from '../../../../../Reducer/InitReducer/Managament/indexManagament';
 import * as Reducer from '../../../../../Reducer/Reducers/Managament/ProjectManagement';
 import * as typeAPI from '../../../../../Reducer/Fetch_API/ApiTypeProject';
+import { post } from '../../post'
+import axios from "axios";
 let index = 0;
 const { RangePicker } = DatePicker;
 const FormAddProject = () => {
@@ -13,11 +15,72 @@ const FormAddProject = () => {
     const [stateItem, dispatchitem] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament)
     const [stateAddItem, dispatchAdditem] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament)
     const [name, setName] = useState('');
+    const [group, setGroup] = useState([]);
+    const [nameGroup, setNameGroup] = useState([]);
+    const [idUseGroup, setIdUseGroup] = useState([]);
     const inputRef = useRef(null);
+
+    const onFinish = (values) => {
+
+
+        axios.post('http://' + post + '/UploadWork', {
+            data:
+            {
+                nameWork: values.nameProject,
+                deadlineFrom: values.datedob[0]._d,
+                deadlineTo: values.datedob[1]._d,
+                idGroup: values.arrayIdGroup,
+                group: nameGroup,
+                criticalLevel: values.criticalLevel,
+                idPorjectType: values.projectType,
+            }
+        }
+        ).then(response => {
+            var idWorkTemp = response.data.insertId;
+            if (response.data = 'ok') {
+                console.log(idWorkTemp);
+                if (idWorkTemp != null) {
+                    for (let i = 0; i < idUseGroup.length; i++) {
+                        const elemenIdUseGroup = JSON.parse(idUseGroup[i]);
+                        for (let j = 0; j < elemenIdUseGroup.length; j++) {
+                            const idUser = elemenIdUseGroup[j];
+                            axios.post('http://' + post + '/UploadUserTag', {
+                                data:
+                                {
+                                    idWork: idWorkTemp,
+                                    idUser: idUser
+                                }
+                            }
+                            ).then(response => {
+                                if (response.data = 'ok') {
+                                    console.log("Upload successful");
+                                }
+                            });
+                        }
+                    }
+                }
+                onReset();
+                alert("Thêm dự án thành công!")
+            }
+        });
+    };
+
+    const getGroups = async () => {
+        const baseurl = 'http://' + post + '/getListGrType';
+        const response = await axios.get(baseurl);
+        var data = response.data;
+        console.log(data);
+        setGroup(data);
+    }
+
+    const setDataWorkUserTag = () => {
+
+    }
 
     //Form Add Items
     useEffect(() => {
         typeAPI.getListTypeProject(dispatchitem)
+        getGroups();
     }, [stateAddItem]);
     const addItem = (e) => {
         e.preventDefault();
@@ -33,27 +96,11 @@ const FormAddProject = () => {
     };
 
 
-    const onGenderChange = (value) => {
-        switch (value) {
-            case 'male':
-                form.setFieldsValue({
-                    note: 'Hi, man!',
-                });
-                return;
-            case 'female':
-                form.setFieldsValue({
-                    note: 'Hi, lady!',
-                });
-                return;
-            case 'other':
-                form.setFieldsValue({
-                    note: 'Hi there!',
-                });
-        }
+    const onProjectTypeChange = (value) => {
+        // data id loại dự án
+        console.log(value);
     };
-    const onFinish = (values) => {
-        console.log(values);
-    };
+
     const onReset = () => {
         form.resetFields();
     };
@@ -66,15 +113,32 @@ const FormAddProject = () => {
     };
 
     const options = [];
-    for (let i = 10; i < 36; i++) {
+    group.map((item) => {
         options.push({
-            label: i.toString(36) + i,
-            value: i.toString(36) + i,
+            label: item.tennhom,
+            value: item.id,
         });
-    }
+    });
 
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
+
+
+    const handleChange = async (value) => {
+        setNameGroup([]);
+        setIdUseGroup([]);
+        if (value == null) {
+            setNameGroup([]);
+            setIdUseGroup([]);
+        }
+        for (let i = 0; i < value.length; i++) {
+            const idGroup = value[i];
+            const baseurl = 'http://' + post + '/getGroup/?idGroup=' + idGroup;
+            const response = await axios.get(baseurl);
+            var element = response.data[0];
+            setNameGroup((nameGroup) => [...nameGroup, element.tennhom]);
+            setIdUseGroup((idUseGroup) => [...idUseGroup, element.nhanviennhom])
+        }
+        console.log(idUseGroup);
+
     };
 
     const props = {
@@ -94,9 +158,7 @@ const FormAddProject = () => {
             }
         },
     };
-    const checkData = ()=>{
-        console.log(stateItem);
-    }
+
     return (
         <>
 
@@ -104,14 +166,13 @@ const FormAddProject = () => {
                 <Breadcrumb.Item>TẠO DỰ ÁN MỚI</Breadcrumb.Item>
             </Breadcrumb>
             <div className='full-bg-form-add-project'>
-           <button onClick={()=>{checkData()}}></button>
                 <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish}>
                     <Row className='form-col'>
                         <Col lg={11} md={24} sm={24} xs={24}>
                             <Form.Item
                                 label="Tên Dự Án"
                                 name="nameProject"
-                                rules={type.Validate_Name_Project}
+                            // rules={type.Validate_Name_Project}
                             >
                                 <Input placeholder="Nhập tên dự án của bạn" />
                             </Form.Item>
@@ -120,11 +181,11 @@ const FormAddProject = () => {
                             <Form.Item
                                 label="Loại Dự Án"
                                 name="projectType"
-                                rules={type.Validate_required}
+                            // rules={type.Validate_required}
                             >
                                 <Select
                                     placeholder="Chọn loại dự án"
-                                    onChange={onGenderChange}
+                                    onChange={onProjectTypeChange}
                                     allowClear
                                     showSearch
                                     options={stateItem.data.map((item) => ({
@@ -160,8 +221,8 @@ const FormAddProject = () => {
                         <Col lg={11} md={24} sm={24} xs={24}>
                             <Form.Item
                                 label="Tên Nhóm (Phòng Ban)"
-                                name="nameGroup"
-                                rules={type.Validate_required}
+                                name="arrayIdGroup"
+                            // rules={type.Validate_required}
                             >
                                 <Select
                                     mode="multiple"
@@ -170,7 +231,6 @@ const FormAddProject = () => {
                                         width: '100%',
                                     }}
                                     placeholder="Please select"
-                                    defaultValue={['a10', 'c12']}
                                     onChange={handleChange}
                                     options={options}
                                 />
@@ -178,13 +238,13 @@ const FormAddProject = () => {
                         </Col>
                         <Col lg={11} md={24} sm={24} xs={24}>
                             <Form.Item
-                                label="Người Quản Lý Dự Án"
-                                name="Leader"
-                                rules={type.Validate_required}
+                                label="Cấp độ dự á"
+                                name="criticalLevel"
+                            // rules={type.Validate_required}
                             >
                                 <Select
                                     showSearch
-                                    placeholder="Chọn để tìm kiếm"
+                                    placeholder="Chọn cấp độ dự án"
                                     optionFilterProp="children"
                                     onChange={onChange}
                                     onSearch={onSearch}
@@ -194,28 +254,27 @@ const FormAddProject = () => {
                                     }
                                     options={[
                                         {
-                                            value: 'jack',
-                                            label: 'Jack',
+                                            value: 1,
+                                            label: 'Gấp',
                                         },
                                         {
-                                            value: 'lucy',
-                                            label: 'Lucy',
-                                        },
-                                        {
-                                            value: 'tom',
-                                            label: 'Tom',
-                                        },
+                                            value: 0,
+                                            label: 'Bình thường',
+                                        }
+
                                     ]}
                                 />
                             </Form.Item>
                         </Col>
+
+
                     </Row>
                     <Row className='form-col' style={{ paddingTop: '20px' }}>
                         <Col lg={11} md={24} sm={24} xs={24}>
                             <Form.Item
                                 label="Dự Kiến Ngày Bắt Đầu & Kết Thúc"
                                 name="datedob"
-                                rules={type.Validate_required}
+                            // rules={type.Validate_required}
                             >
                                 <RangePicker style={{ width: '100%', }}
                                     dateRender={(current) => {
@@ -228,33 +287,19 @@ const FormAddProject = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={11} md={24} sm={24} xs={24}>
-                            <Row className='form-coll'>
-                                <Col span={11}>
+                        <Col lg={11} md={24} sm={24} xs={24} />
 
-                                </Col>
-                                <Col span={11}>
-                                    <Form.Item
-                                        label="Khởi Chạy Dự Án"
-                                        name="StartProject"
-                                        rules={type.Validate_required}
-                                    >
-                                        <Switch defaultChecked onChange={onChange} />
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-                        </Col>
                     </Row>
                     <Row className='form-col' style={{ paddingTop: '20px' }}>
                         <Col lg={23} md={24} sm={24} xs={24}>
-                            <Form.Item >
-                                <button type="primary" htmlType="submit" className='custom-btn btn-12'>
-                                    <span>LƯU</span><span>LÀM MỚI</span>
+                            <div style={{ display: "flex" }}>
+                                <button type="primary" onClick={()=> onReset()} htmlType="submit" >
+                                    <span>LÀM MỚI</span>
                                 </button>
-                                <button htmlType="button" onClick={onReset} style={{ marginLeft: '40px' }} className='custom-btn btn-11'>
-                                    <span>LÀM MỚI</span><span>LƯU</span>
+                                <button htmlType="button" style={{ marginLeft: '40px' }}>
+                                    <span>LƯU</span>
                                 </button>
-                            </Form.Item>
+                            </div>
                         </Col>
                     </Row>
                 </Form>

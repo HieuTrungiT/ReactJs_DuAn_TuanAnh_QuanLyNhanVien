@@ -22,8 +22,6 @@ function PageDiemDanh() {
     const [commitment, setConmitment] = useState("");
     const [reason, setReason] = useState("");
     const [mediaFile, setMediaFile] = useState();
-    const [nameFile, setNameFile] = useState("")
-    const [accuracy, setAccuracy] = useState("");
     const [listTimekeeping, setListTimekeeping] = useState([]);
     const [contentAlert, setContentAlert] = useState("");
     const [variantAlert, setVariantAlert] = useState('success');
