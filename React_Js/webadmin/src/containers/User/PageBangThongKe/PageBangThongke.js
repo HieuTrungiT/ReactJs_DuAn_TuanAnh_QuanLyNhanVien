@@ -20,14 +20,15 @@ function PageBangThongKe() {
     const [arrayListWorkDate, setListWorkDate] = useState([]);
     const [arrGounps, setArrGrounp] = useState([]);
     var date = new Date; // get current date
-
+    const idUserJson = localStorage.getItem('idUser');
+    const idUser = JSON.parse(idUserJson);
     // Get list work user tag
     const getWorkUserTags = async () => {
         setListWorkUserTag([]);
         setListWorkUser([]);
         setArrGrounp([]);
 
-        const baseurl = 'http://' + post + '/getWorkUserTags/?idUser=17';
+        const baseurl = 'http://' + post + '/getWorkUserTags/?idUser='+idUser;
         const response = await axios.get(baseurl);
         setListWorkUserTag(response.data);
         var listUserTags = response.data;

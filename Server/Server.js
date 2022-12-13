@@ -153,6 +153,15 @@ app.post("/dangnhap", (req, res) => {
     }
   });
 });
+//Hiển thị thông tin tài khoản tại email
+app.get('/getAccouWhereId', function (req, res) {
+  console.log(req.query);
+  con.query("SELECT * FROM `account` WHERE email ='"+req.query.email +"'", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 //Hiển thị thông tin tài khoản
 app.get('/showaccount', function (req, res) {
   con.query("SELECT * FROM `account` order by id desc", function (err, result, fields) {
@@ -873,7 +882,7 @@ app.get('/getTimekeeping', function (req, res) {
 app.post('/uploadOffWork', (req, res) => {
 
 
-  var sql = "INSERT INTO `timekeepings`(`date_off_work_to`,`date_off_work_form`,`commitment`,`reason`,`status`,`idUser`) VALUES ('" + req.body.data.dateTo + "','" + req.body.data.dateFrom + "','" + req.body.data.commitment + "','" + req.body.data.reason + "','1','17')";
+  var sql = "INSERT INTO `timekeepings`(`date_off_work_to`,`date_off_work_form`,`commitment`,`reason`,`status`,`idUser`) VALUES ('" + req.body.data.dateTo + "','" + req.body.data.dateFrom + "','" + req.body.data.commitment + "','" + req.body.data.reason + "','1','"+req.body.data.idUser+"')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
@@ -976,7 +985,7 @@ app.get('/getWorkReportWhereId', function (req, res) {
 app.post('/uploadReportWorkNoImage', (req, res) => {
 
 
-  var sql = "INSERT INTO `work_report`( `idUser`, `idWorkUserTag`, `dateReport`, `workDone`, `workInprogress`, `workToto`, `workQuestions`, `nameFile`) VALUES ('" + 23 + "','" + req.body.data.idWorkUserTag + "','" + req.body.data.dateReport + "','" + req.body.data.workDone + "','" + req.body.data.workInprogress + "','" + req.body.data.workToto + "','" + req.body.data.workQuestions + "','" + req.body.data.nameFile + "')";
+  var sql = "INSERT INTO `work_report`( `idUser`, `idWorkUserTag`, `dateReport`, `workDone`, `workInprogress`, `workToto`, `workQuestions`, `nameFile`) VALUES ('" + req.body.data.idUser + "','" + req.body.data.idWorkUserTag + "','" + req.body.data.dateReport + "','" + req.body.data.workDone + "','" + req.body.data.workInprogress + "','" + req.body.data.workToto + "','" + req.body.data.workQuestions + "','" + req.body.data.nameFile + "')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
@@ -1004,7 +1013,7 @@ app.post("/uploadReportImage", upload.single("file", ""), (req, res, next) => {
   const data = req.body
 
   const nameImg = files.filename;
-  var sql = "INSERT INTO `work_report`( `idUser`,`idWorkUserTag`, `dateReport`, `workDone`, `workInprogress`, `workToto`, `workQuestions`, `nameFile`) VALUES ('" + 23 + "','" + data.idWorkUserTag + "','" + data.dateReport + "','" + data.workDone + "','" + data.workInprogress + "','" + data.workToto + "','" + data.workQuestions + "','" + nameImg + "')";
+  var sql = "INSERT INTO `work_report`( `idUser`,`idWorkUserTag`, `dateReport`, `workDone`, `workInprogress`, `workToto`, `workQuestions`, `nameFile`) VALUES ('" + data.idUser + "','" + data.idWorkUserTag + "','" + data.dateReport + "','" + data.workDone + "','" + data.workInprogress + "','" + data.workToto + "','" + data.workQuestions + "','" + nameImg + "')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {

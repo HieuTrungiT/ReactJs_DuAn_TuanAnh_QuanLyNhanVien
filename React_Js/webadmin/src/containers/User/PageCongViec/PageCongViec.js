@@ -10,9 +10,12 @@ function PageCongViec() {
     const [listWorkUserTag, setListWorkUserTag] = useState([]);
     const [arrayListWork, setListWorkUser] = useState([]);
 
+    const idUserJson = localStorage.getItem('idUser');
+    const idUser = JSON.parse(idUserJson);
+
     // Get list work user tag
     const getWorkUserTags = async () => {
-        const baseurl = 'http://' + post + '/getWorkUserTags/?idUser=23';
+        const baseurl = 'http://' + post + '/getWorkUserTags/?idUser='+idUser;
         const response = await axios.get(baseurl);
         setListWorkUserTag(response.data);
         var listUserTags = response.data;
@@ -23,6 +26,8 @@ function PageCongViec() {
         });
 
     }
+
+
 
     const getWorkObjects = async (element) => {
         const baseurl = 'http://' + post + '/getWorkObjects/?idWork=' + element.idWork;
@@ -40,6 +45,7 @@ function PageCongViec() {
     useEffect(() => {
         if (countCheckReloadData == 0) {
             getWorkUserTags();
+
             countCheckReloadData++;
         }
     }, [])

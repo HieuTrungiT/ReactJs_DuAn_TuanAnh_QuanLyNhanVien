@@ -16,18 +16,36 @@ import { API_LOGIN, API_REGISTER, API_FORGOT_PW } from '../../../../api/index';
 import axios from 'axios';
 import { ErrorLogin, ErrorAccountBan, ErrorAccountLOCK, ErrorRegister, ErrorForgotPW } from '../../../../components/Message/Error';
 import { WarningRegister } from '../../../../components/Message/Warning';
+import { post } from '../../../../containers/Admin/Project/post'
+
 
 function LoginRight() {
     const [modalForgotPW, setModalForgotPW] = useState(false);
     const [state, dispatch] = useReducer(success, Login);
     const navigate = useNavigate();
+
+    const GetAccouWhereId = async (email) => {
+        let getUser = localStorage.getItem("Save_Login");
+        let dataUser = JSON.parse(getUser)
+        console.log(dataUser.email);
+        const baseurl = 'http://' + post + '/getAccouWhereId/?email=' + email;
+        const response = await axios.get(baseurl);
+        localStorage.setItem("idUser", response.data[0].id);
+        console.log(response.data[0].id);
+    }
+
     useEffect(() => {
         const Check_Login = localStorage.getItem('Save_Login');
         const Home = JSON.parse(Check_Login);
+
+
+        if (Home != null) {
+            GetAccouWhereId(Home.email)
+        }
         {
             state.jobs.email != null && navigate("/")
         }
-        {Home != null && navigate("/")}
+        { Home != null && navigate("/") }
     }, [state]);
 
     //Hàm Submit
@@ -108,7 +126,7 @@ function LoginRight() {
                     sitekey="6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP"
                 /> */}
                 <ReCAPTCHA className="ReCAPTCHA"
-                sitekey='6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP'>
+                    sitekey='6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP'>
 
                 </ReCAPTCHA>
             </Form.Item>

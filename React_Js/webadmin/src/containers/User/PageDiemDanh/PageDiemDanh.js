@@ -26,6 +26,10 @@ function PageDiemDanh() {
     const [contentAlert, setContentAlert] = useState("");
     const [variantAlert, setVariantAlert] = useState('success');
     const [isShowAlert, setIsCheckShowAlert] = useState(false)
+    const idUserJson = localStorage.getItem('idUser');
+    const idUser = JSON.parse(idUserJson);
+
+
     // Form điểm danh
     const getDateToday = () => {
         let date = new Date();
@@ -60,7 +64,7 @@ function PageDiemDanh() {
                             formdata.append("file", mediaFile);
                             formdata.append("dateToday", dateToday);
                             formdata.append("notes", notes);
-                            formdata.append("idUser", 17);
+                            formdata.append("idUser", idUser);
 
 
                             axios.post('http://' + post + '/uploadTimekeepingImage',formdata)
@@ -118,7 +122,7 @@ function PageDiemDanh() {
                                     if (dateOrrFrom.getDate() >= dateOffTo.getDate()) {
                                         if (commitment != "") {
                                             if (reason != "") {
-                                                axios.post('http://' + post + '/uploadOffWork', { data: { dateTo: dateOffWorkTo, dateFrom: dateOffWorkFrom == null || dateOffWorkFrom == "" ? dateOffWorkTo : dateOffWorkFrom, commitment: commitment, reason: reason } })
+                                                axios.post('http://' + post + '/uploadOffWork', { data: { idUser:idUser,dateTo: dateOffWorkTo, dateFrom: dateOffWorkFrom == null || dateOffWorkFrom == "" ? dateOffWorkTo : dateOffWorkFrom, commitment: commitment, reason: reason } })
                                                     .then(response => {
                                                         if (response.data = 'ok') {
                                                             getDateToday()
@@ -163,7 +167,7 @@ function PageDiemDanh() {
                         } else {
                             if (commitment != "") {
                                 if (reason != "") {
-                                    axios.post('http://' + post + '/uploadOffWork', { data: { dateTo: dateOffWorkTo, dateFrom: dateOffWorkFrom == null || dateOffWorkFrom == "" ? dateOffWorkTo : dateOffWorkFrom, commitment: commitment, reason: reason } })
+                                    axios.post('http://' + post + '/uploadOffWork', { data: { idUser:idUser,dateTo: dateOffWorkTo, dateFrom: dateOffWorkFrom == null || dateOffWorkFrom == "" ? dateOffWorkTo : dateOffWorkFrom, commitment: commitment, reason: reason } })
                                         .then(response => {
                                             if (response.data = 'ok') {
                                                 getDateToday()
@@ -217,7 +221,7 @@ function PageDiemDanh() {
 
     // Form table bảng công
     const getTimekeeping = async () => {
-        const baseurl = 'http://' + post + '/getTimekeeping/?idUser=17';
+        const baseurl = 'http://' + post + '/getTimekeeping/?idUser='+idUser;
         const response = await axios.get(baseurl);
         setListTimekeeping(response.data)
 

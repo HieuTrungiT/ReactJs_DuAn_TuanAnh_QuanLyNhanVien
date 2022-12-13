@@ -20,7 +20,8 @@ function PageBaoCaoCongViec() {
     const [workInProgress, setWorkInProgress] = useState('');
     const [workQuestions, setWorkQuestions] = useState('');
     const [file, setFile] = useState('');
-
+    const idUserJson = localStorage.getItem('idUser');
+    const idUser = JSON.parse(idUserJson);
 
     const getWorkObjects = async () => {
 
@@ -128,7 +129,7 @@ function PageBaoCaoCongViec() {
 
                             data: {
                                 stateReport: 1,
-                                idWork:idWork,
+                                idUser:idUser,
                                 idWorkUserTag: idWorkUserTag,
                                 dateReport: dateToday,
                                 workDone: workDone,
@@ -150,7 +151,7 @@ function PageBaoCaoCongViec() {
 
                 formdata.append("file", file);
                 formdata.append("stateReport", 1);
-                formdata.append("idWork",  idWork);
+                formdata.append("idUser",  idUser);
                 formdata.append("idWorkUserTag",  idWorkUserTag);
                 formdata.append("dateReport",  dateToday);
                 formdata.append("workDone",  workDone);
@@ -186,7 +187,7 @@ function PageBaoCaoCongViec() {
 
                             data: {
                                 stateReport: arrayWork.status,
-                                idWork: idWork,
+                                idUser:idUser,
                                 idWorkUserTag: idWorkUserTag,
                                 dateReport: dateToday,
                                 workDone: workDone,
@@ -208,7 +209,7 @@ function PageBaoCaoCongViec() {
 
                 formdata.append("file", file);
                 formdata.append("stateReport",  arrayWork.status);
-                formdata.append("idWork",  idWork);
+                formdata.append("idUser", idUser);
                 formdata.append("idWorkUserTag",  idWorkUserTag);
                 formdata.append("dateReport",  dateToday);
                 formdata.append("workDone",  workDone);
@@ -223,7 +224,7 @@ function PageBaoCaoCongViec() {
                     if (response.data = 'ok') {
                         console.log("Upload successful");
 
-                    alert("Báo cáo công việc thành công!")
+                            alert("Báo cáo công việc thành công!")
                     }
                 });
             }
@@ -245,7 +246,7 @@ function PageBaoCaoCongViec() {
     return (
         <div className="containers-page_bao_cao_cong_viec">
             <div className="containers">
-                <p className='title-form'>BẢNG BÁO CÁO CÔNG VIỆC</p>
+                <p c lassName='title-form'>BẢNG BÁO CÁO CÔNG VIỆC</p>
                 <div className="contai-header_status-bao_cao_cong_viec">
                     <div className='form-info-work'>
                         <div className='info-content-work'>
