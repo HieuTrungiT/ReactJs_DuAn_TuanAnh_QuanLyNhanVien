@@ -868,7 +868,12 @@ app.post("/uploadTimekeepingImage", upload.single("file", ""), (req, res, next) 
   });
 
 });
-
+app.get('/getAllTimekeeping', function (req, res) {
+  con.query("SELECT * FROM `timekeepings` order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 // get Timekeeping
 app.get('/getTimekeeping', function (req, res) {
 
@@ -878,10 +883,26 @@ app.get('/getTimekeeping', function (req, res) {
     res.send(result);
   });
 });
+app.get('/getTimekeepingWhereId', function (req, res) {
+  con.query("SELECT * FROM `timekeepings` WHERE id = '" + req.query.idTimeKeeping + "'order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+app.post('/confirmTimeKeepings', (req, res) => {
+  const data = req.body
+console.log(data.data.id);
+  var sql = "UPDATE `timekeepings` SET `accuracy`='"+data.data.accuracy+"'WHERE id =" + data.data.id;
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result === "ok" || result.affectedRows === 1) {
+      res.send("ok");
+      console.log("upload off work successful!");
+    }
+  });
+})
 // OffWork
 app.post('/uploadOffWork', (req, res) => {
-
-
   var sql = "INSERT INTO `timekeepings`(`date_off_work_to`,`date_off_work_form`,`commitment`,`reason`,`status`,`idUser`) VALUES ('" + req.body.data.dateTo + "','" + req.body.data.dateFrom + "','" + req.body.data.commitment + "','" + req.body.data.reason + "','1','"+req.body.data.idUser+"')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;

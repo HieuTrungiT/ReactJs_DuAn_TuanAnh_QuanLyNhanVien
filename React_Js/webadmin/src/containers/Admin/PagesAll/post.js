@@ -1,1 +1,5 @@
-export const post = '192.168.1.6:3001'; 
+const port = '3001';
+
+const API = 'localhost'
+
+export const post = '' + API + ':' + port + '';

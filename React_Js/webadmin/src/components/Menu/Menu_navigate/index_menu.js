@@ -27,10 +27,10 @@ export const items_admin = [
   ]),
   getItem('Dự Án', 'sub1', <FundProjectionScreenOutlined />, [
     getItem(<Link style={{ textDecoration: "none" }} to={"/danh-sach-du-an"}>Danh Sách Dự Án</Link>, '5'),
-    getItem('Hoạt Động Dự Án', '6'),
+
   ]),
   getItem('Quản Lý', 'sub2', <OrderedListOutlined />, [
-    getItem('Quản Lý Chấm Công', '7'),
+    getItem(<Link style={{ textDecoration: "none" }} to={"/quan-ly-cham-cong"}>Quản Lý Chấm công</Link>, '7'),
     getItem('Quản Lý Nhân Viên', '8'),
     getItem('Quản Lý Thời Gian', '9'),
     getItem(<Link style={{ textDecoration: "none" }} to={"/quan-ly-nhom"}>Quản Lý Nhóm</Link>, '10'),

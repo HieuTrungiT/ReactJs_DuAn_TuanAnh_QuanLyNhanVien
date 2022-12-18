@@ -15,6 +15,8 @@ import ManageTypeProject from '../containers/Admin/PageManage/ManageTypeProject/
 import ListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/ListTypeManageListGrMember";
 import AddListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/AddListTypeManageListGrMember/AddListTypeManageListGrMember";
 import DetailListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/DetailListTypeManageListGrMember/DetailListTypeManageListGrMember";
+import ManagerTimeKeepings from "../containers/Admin/PageManage/ManagerTimeKeepings/ManagerTimeKeepings";
+import DetailTimeKeeping from "../containers/Admin/PageManage/ManagerTimeKeepings/DetailTimeKeeping";
 import { NaviLayout } from '../containers/Admin';
 
 import ListPageDiemDanh from '../containers/User/PageDiemDanh/listPageDiemDanh';
@@ -142,6 +144,13 @@ const AdminRoute = [
     {
         path: "/quan-ly-nhom/:id",
         component: DetailListTypeManageListGrMember,
+    },  {
+        path: "/quan-ly-cham-cong",
+        component: ManagerTimeKeepings,
+    },
+    {
+        path: "/chi-tiet-cham-cong/:id",
+        component: DetailTimeKeeping,
     },
 ]
 
