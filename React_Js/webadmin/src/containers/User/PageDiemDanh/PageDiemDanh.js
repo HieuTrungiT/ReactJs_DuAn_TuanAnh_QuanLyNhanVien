@@ -7,8 +7,6 @@ import { post } from '../../Admin/Project/post'
 import axios from "axios";
 // import DatePicker from 'react-datepicker';
 import Alert from 'react-bootstrap/Alert';
-import { Textarea } from 'react-bootstrap-icons';
-
 
 function PageDiemDanh() {
     const [dateToday, setDate] = useState();
@@ -30,8 +28,10 @@ function PageDiemDanh() {
     const idUser = JSON.parse(idUserJson);
 
 
+
     // Form điểm danh
     const getDateToday = () => {
+
         let date = new Date();
         var readableDate = "" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + ""
         console.log(date);
@@ -41,62 +41,71 @@ function PageDiemDanh() {
         setHoursNow(date.getHours())
     }
     const submitFormTimekeeping = () => {
+
+        let day = new Date().getDay();
         setTimeout(function () {
+            if (day >= 2) {
+                if (hoursNow >= timeOut && hoursNow <= timeOut + 1) {
+                    if (blNotOffDay) {
+                        if (checkOut) {
+                            if (mediaFile == null) {
+                                axios.post('http://' + post + '/uploadTimekeepingNoImage', { data: { dateToday: dateToday, notes: notes, nameFile: "NO_NAME_FILE" } })
+                                    .then(response => {
+                                        if (response.data = 'ok') {
+                                            getDateToday()
+                                            getTimekeeping()
+                                            setIsCheckShowAlert(true);
+                                            setContentAlert("Điểm danh thành công")
+                                            setVariantAlert('success');
+                                            setHiddenAlert()
+                                        }
+                                    });
+                            } else {
+                                const formdata = new FormData();
 
-            if (hoursNow >= timeOut && hoursNow <= timeOut + 1) {
-                if (blNotOffDay) {
-                    if (checkOut) {
-                        if (mediaFile == null) {
-                            axios.post('http://' + post + '/uploadTimekeepingNoImage', { data: { dateToday: dateToday,notes:notes, nameFile: "NO_NAME_FILE" } })
-                                .then(response => {
-                                    if (response.data = 'ok') {
-                                        getDateToday()
-                                        getTimekeeping()
-                                        setIsCheckShowAlert(true);
-                                        setContentAlert("Điểm danh thành công")
-                                        setVariantAlert('success');
-                                        setHiddenAlert()
-                                    }
-                                });
+                                formdata.append("file", mediaFile);
+                                formdata.append("dateToday", dateToday);
+                                formdata.append("notes", notes);
+                                formdata.append("idUser", idUser);
+
+
+                                axios.post('http://' + post + '/uploadTimekeepingImage', formdata)
+                                    .then(response => {
+                                        if (response.data = 'ok') {
+                                            getDateToday()
+                                            getTimekeeping()
+                                            setIsCheckShowAlert(true);
+                                            setContentAlert("Điểm danh thành công")
+                                            setVariantAlert('success');
+                                            setHiddenAlert()
+                                        }
+                                    });
+                            }
+
+
+
                         } else {
-                            const formdata = new FormData();
-
-                            formdata.append("file", mediaFile);
-                            formdata.append("dateToday", dateToday);
-                            formdata.append("notes", notes);
-                            formdata.append("idUser", idUser);
-
-
-                            axios.post('http://' + post + '/uploadTimekeepingImage',formdata)
-                                .then(response => {
-                                    if (response.data = 'ok') {
-                                        getDateToday()
-                                        getTimekeeping()
-                                        setIsCheckShowAlert(true);
-                                        setContentAlert("Điểm danh thành công")
-                                        setVariantAlert('success');
-                                        setHiddenAlert()
-                                    }
-                                });
+                            setIsCheckShowAlert(true);
+                            setContentAlert("Bạn đã điểm danh hôm nay!")
+                            setVariantAlert('warning');
+                            setHiddenAlert()
                         }
-
-
-
                     } else {
                         setIsCheckShowAlert(true);
-                        setContentAlert("Bạn đã điểm danh hôm nay!")
-                        setVariantAlert('warning');
+                        setContentAlert("Trạng thái đang trong ngày nghỉ vui lòng kiểm tra lại")
+                        setVariantAlert('danger');
                         setHiddenAlert()
                     }
                 } else {
                     setIsCheckShowAlert(true);
-                    setContentAlert("Trạng thái đang trong ngày nghỉ vui lòng kiểm tra lại")
+                    setContentAlert("Chưa đến giờ điểm danh vui lòng quay lại sau")
                     setVariantAlert('danger');
                     setHiddenAlert()
                 }
+
             } else {
                 setIsCheckShowAlert(true);
-                setContentAlert("Chưa đến giờ điểm danh vui lòng quay lại sau")
+                setContentAlert("Thao tác không hợp lệ với ngày làm việc.")
                 setVariantAlert('danger');
                 setHiddenAlert()
             }
@@ -105,6 +114,23 @@ function PageDiemDanh() {
     const changeHandler = (event) => {
         setMediaFile(event.target.files[0]);
     };
+    const confirmForm = () => {
+        let text = "Bạn có muốn xác nhận xin vắng?";
+        if (window.confirm(text) == true) {
+            text = "Đồng ý";
+            submitOffWork();
+            setDateOffWorkTo(null);
+            setDateOffWorkFrom(null);
+            setConmitment(null);
+            setReason(null);
+        } else {
+            text = "Hủy!";
+            setDateOffWorkTo(null);
+            setDateOffWorkFrom(null);
+            setConmitment(null);
+            setReason(null);
+        }
+    }
     // Form xin vắng
     const submitOffWork = () => {
         // validate
@@ -122,7 +148,7 @@ function PageDiemDanh() {
                                     if (dateOrrFrom.getDate() >= dateOffTo.getDate()) {
                                         if (commitment != "") {
                                             if (reason != "") {
-                                                axios.post('http://' + post + '/uploadOffWork', { data: { idUser:idUser,dateTo: dateOffWorkTo, dateFrom: dateOffWorkFrom == null || dateOffWorkFrom == "" ? dateOffWorkTo : dateOffWorkFrom, commitment: commitment, reason: reason } })
+                                                axios.post('http://' + post + '/uploadOffWork', { data: { idUser: idUser, dateTo: dateOffWorkTo, dateFrom: dateOffWorkFrom == null || dateOffWorkFrom == "" ? dateOffWorkTo : dateOffWorkFrom, commitment: commitment, reason: reason } })
                                                     .then(response => {
                                                         if (response.data = 'ok') {
                                                             getDateToday()
@@ -167,7 +193,7 @@ function PageDiemDanh() {
                         } else {
                             if (commitment != "") {
                                 if (reason != "") {
-                                    axios.post('http://' + post + '/uploadOffWork', { data: { idUser:idUser,dateTo: dateOffWorkTo, dateFrom: dateOffWorkFrom == null || dateOffWorkFrom == "" ? dateOffWorkTo : dateOffWorkFrom, commitment: commitment, reason: reason } })
+                                    axios.post('http://' + post + '/uploadOffWork', { data: { idUser: idUser, dateTo: dateOffWorkTo, dateFrom: dateOffWorkFrom == null || dateOffWorkFrom == "" ? dateOffWorkTo : dateOffWorkFrom, commitment: commitment, reason: reason } })
                                         .then(response => {
                                             if (response.data = 'ok') {
                                                 getDateToday()
@@ -221,7 +247,7 @@ function PageDiemDanh() {
 
     // Form table bảng công
     const getTimekeeping = async () => {
-        const baseurl = 'http://' + post + '/getTimekeeping/?idUser='+idUser;
+        const baseurl = 'http://' + post + '/getTimekeeping/?idUser=' + idUser;
         const response = await axios.get(baseurl);
         setListTimekeeping(response.data)
 
@@ -251,9 +277,9 @@ function PageDiemDanh() {
             var dateOffFrom = new Date(item.date_off_work_form);
             console.log(dateOffTo.getMonth());
             console.log(monthNow + 1);
-            if (yearNow >= dateOffTo.getFullYear()  &&  yearNow <= dateOffFrom.getFullYear()) {
-                if (monthNow >= dateOffTo.getMonth()  && monthNow  <= dateOffFrom.getMonth() ) {
-                    if (dateNow >= dateOffTo.getDate() && dateNow <= dateOffFrom.getDate() ) {
+            if (yearNow >= dateOffTo.getFullYear() && yearNow <= dateOffFrom.getFullYear()) {
+                if (monthNow >= dateOffTo.getMonth() && monthNow <= dateOffFrom.getMonth()) {
+                    if (dateNow >= dateOffTo.getDate() && dateNow <= dateOffFrom.getDate()) {
                         setCheckOut(false);
                         setBlNotOffDay(false);
                         console.log("Trong ngày nghỉ");
@@ -280,6 +306,7 @@ function PageDiemDanh() {
                 {contentAlert}
             </Alert>
             <div className="containers">
+
                 <div className="container-formDiemDanh">
                     <p className="title-text">
                         ĐIỂM DANH
@@ -307,7 +334,7 @@ function PageDiemDanh() {
                             <div className="content-rightIpt">
                                 <TextArea id="ipt-ghiChuDiemDanh" name="ghiChuDiemDanh" rows="4" cols="20" defaultValue={"Ghi chú nếu có."} onChange={e => setNotes(e.target.value)} />
                             </div>
-                            <button style={{ opacity: hoursNow >= timeOut && hoursNow <= timeOut + 1 && checkOut ? '1' : '0.5', cursor: hoursNow >= timeOut && hoursNow <= timeOut + 1 && checkOut ? 'pointer' : 'no-drop' }} className="content-btnDiemDanh" onClick={submitFormTimekeeping}>
+                            <button style={{ opacity: hoursNow >= timeOut && hoursNow <= timeOut + 1 && new Date().getDay() >= 2 && checkOut ? '1' : '0.5', cursor: hoursNow >= timeOut && hoursNow <= timeOut + 1 && checkOut ? 'pointer' : 'no-drop' }} className="content-btnDiemDanh" onClick={submitFormTimekeeping}>
                                 ĐIỂM DANH
                             </button>
                         </div>
@@ -337,7 +364,7 @@ function PageDiemDanh() {
                         </div>
                         <TextArea className="ipt-banLyDo" id="ipt-banLyDo" name="banLyDo" rows="4" cols="20" defaultValue={"Lý do"} onChange={e => setReason(e.target.value)} />
                     </div>
-                    <button className="btn-formXinVang" onClick={submitOffWork} >
+                    <button className="btn-formXinVang" onClick={confirmForm} >
                         XIN VẮNG
                     </button>
 
@@ -358,9 +385,9 @@ function PageDiemDanh() {
                                 <div className="tbody-element">
                                     <td >{item.date == null || item.date == "" ? item.date_off_work_to == item.date_off_work_form ? item.date_off_work_to : item.date_off_work_to + " đến " + item.date_off_work_form : item.date}</td>
 
-                                    {item.status == 0 ? <td className="status_OK">OK</td> : <td className="status_Fail">Fail</td>}
+                                    {item.status == 0 ? <td className="status_OK">Điểm danh</td> : <td className="status_Fail">Xin vắng</td>}
 
-                                    {item.accuracy == 0 ? <td className="accuracy_Waiting">Waiting</td> : <td className="accuracy_Confirm">Confirm</td>}
+                                    {item.accuracy == 0 ? <td className="accuracy_Waiting">Đang chờ</td> :item.accuracy == 1 ? <td className="accuracy_Confirm">Đã xác nhận</td> :<td style={{color:'#FD4438'}}>Từ chối</td>}
 
                                 </div>
                             )}

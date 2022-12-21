@@ -156,7 +156,7 @@ app.post("/dangnhap", (req, res) => {
 //Hiển thị thông tin tài khoản tại email
 app.get('/getAccouWhereId', function (req, res) {
   console.log(req.query);
-  con.query("SELECT * FROM `account` WHERE email ='"+req.query.email +"'", function (err, result, fields) {
+  con.query("SELECT * FROM `account` WHERE email ='" + req.query.email + "'", function (err, result, fields) {
     if (err) throw err;
     res.send(result);
   });
@@ -891,8 +891,8 @@ app.get('/getTimekeepingWhereId', function (req, res) {
 });
 app.post('/confirmTimeKeepings', (req, res) => {
   const data = req.body
-console.log(data.data.id);
-  var sql = "UPDATE `timekeepings` SET `accuracy`='"+data.data.accuracy+"'WHERE id =" + data.data.id;
+  console.log(data.data.id);
+  var sql = "UPDATE `timekeepings` SET `accuracy`='" + data.data.accuracy + "'WHERE id =" + data.data.id;
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
@@ -903,7 +903,7 @@ console.log(data.data.id);
 })
 // OffWork
 app.post('/uploadOffWork', (req, res) => {
-  var sql = "INSERT INTO `timekeepings`(`date_off_work_to`,`date_off_work_form`,`commitment`,`reason`,`status`,`idUser`) VALUES ('" + req.body.data.dateTo + "','" + req.body.data.dateFrom + "','" + req.body.data.commitment + "','" + req.body.data.reason + "','1','"+req.body.data.idUser+"')";
+  var sql = "INSERT INTO `timekeepings`(`date_off_work_to`,`date_off_work_form`,`commitment`,`reason`,`status`,`idUser`) VALUES ('" + req.body.data.dateTo + "','" + req.body.data.dateFrom + "','" + req.body.data.commitment + "','" + req.body.data.reason + "','1','" + req.body.data.idUser + "')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
@@ -925,7 +925,7 @@ app.get('/getWorkUserTags', function (req, res) {
 app.post('/UploadUserTag', (req, res) => {
   const data = req.body
 
-  var sql = "INSERT INTO `work_users_tag`(`idUser`, `idWork`, `status`) VALUES ('"+data.data.idUser+"','"+data.data.idWork+"','0')";
+  var sql = "INSERT INTO `work_users_tag`(`idUser`, `idWork`, `status`) VALUES ('" + data.data.idUser + "','" + data.data.idWork + "','0')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
@@ -933,6 +933,13 @@ app.post('/UploadUserTag', (req, res) => {
     }
   });
 })
+app.get('/destroyWorkUserTags', function (req, res) {
+  con.query("DELETE FROM `work_users_tag` WHERE idWork = " + req.query.idWork, function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 
 app.post('/UploadWork', (req, res) => {
   const data = req.body
@@ -944,7 +951,12 @@ app.post('/UploadWork', (req, res) => {
     }
   });
 })
-
+app.get('/destroyWorkObject', function (req, res) {
+  con.query("DELETE FROM `work_project` WHERE id = " + req.query.idWork, function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
 app.get('/getWorks', function (req, res) {
 
@@ -995,6 +1007,7 @@ app.get('/getWorkReportWhereIdUser', function (req, res) {
     res.send(result);
   });
 });
+
 // get work_report where id
 app.get('/getWorkReportWhereId', function (req, res) {
   con.query("SELECT * FROM `work_report` WHERE id = " + req.query.idReport, function (err, result, fields) {
@@ -1002,10 +1015,16 @@ app.get('/getWorkReportWhereId', function (req, res) {
     res.send(result);
   });
 });
+app.post('/UpdateStateUserTag', function (req, res) {
+  console.log(req.body.data.idUserTag);
+  con.query("UPDATE `work_users_tag` SET `status`='"+req.body.data.State+"' WHERE id =" + req.body.data.idUserTag, function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 // uploadReportWork
 app.post('/uploadReportWorkNoImage', (req, res) => {
-
-
   var sql = "INSERT INTO `work_report`( `idUser`, `idWorkUserTag`, `dateReport`, `workDone`, `workInprogress`, `workToto`, `workQuestions`, `nameFile`) VALUES ('" + req.body.data.idUser + "','" + req.body.data.idWorkUserTag + "','" + req.body.data.dateReport + "','" + req.body.data.workDone + "','" + req.body.data.workInprogress + "','" + req.body.data.workToto + "','" + req.body.data.workQuestions + "','" + req.body.data.nameFile + "')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;

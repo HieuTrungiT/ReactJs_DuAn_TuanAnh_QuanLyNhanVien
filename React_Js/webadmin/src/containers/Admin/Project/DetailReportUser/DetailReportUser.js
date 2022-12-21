@@ -52,11 +52,11 @@ function DetailReportUser() {
                     <div className='contai-bnt-upload'>
                         <p className='lable-upload-file-report' style={{ textAlign: "left", marginTop: "10px" }}>File công việc đính kèm</p>
                         {
-                            report.nameFile == "NO_NAME_FILE" ? <h3>{report.nameFile}</h3> : <img src={"http://localhost:3001/images/" + report.nameFile} />
+                            report.nameFile == "NO_NAME_FILE" ? <h3>{report.nameFile}</h3> : <img style={{width:'100%'}} src={"http://localhost:3001/images/" + report.nameFile} />
                         }
                     </div>
                 </div>
-
+{/*
                 <div className="contai-btn_submit-bao_cao_cong_viec">
                     <div className='btn-submit-progress' >
                         BÁO CÁO TIẾN ĐỘ
@@ -65,7 +65,7 @@ function DetailReportUser() {
                     <div className='btn-submit-complete' >
                         BÁO CÁO HOÀN TẤT
                     </div>
-                </div>
+                </div> */}
 
             </div>
         </div>

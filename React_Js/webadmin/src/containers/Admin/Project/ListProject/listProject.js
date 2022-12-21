@@ -48,8 +48,8 @@ function ListProject() {
                 <a href={'http://localhost:3006/quan-ly-chi-tiet-bao-cao?idWork='+ element.id} style={{ textDecoration: 'none' }} >
                   <div className="tbody-element" >
                     <td style={{ textAlign: 'left' }}>{element.nameWork}</td>
-                    <td style={{ textAlign: 'center' }}>{element.deadlineFrom}</td>
-                    <td style={{ textAlign: 'center' }}>{element.deadlineTo}</td>
+                    <td style={{ textAlign: 'center' }}>{new Date(element.deadlineFrom).toDateString()}</td>
+                    <td style={{ textAlign: 'center' }}>{new Date(element.deadlineTo).toDateString()}</td>
                     <td style={{ textAlign: 'center' }}>{element.group}</td>
                     <td><div style={{ backgroundColor: element.criticalLevel == 0 ? '#4F46BA' : '#FFC430' }} className='box-color_status'></div></td>
                     <td style={{ textAlign: 'center' }}><img src={icoShowDetails} /></td>

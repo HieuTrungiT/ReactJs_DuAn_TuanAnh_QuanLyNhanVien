@@ -10,6 +10,7 @@ function PageBaoCaoCongViec() {
     const [timeFrom, setTimeFrom] = useState("");
     const [timeTo, setTimeTo] = useState("");
     const [dateToday, setDate] = useState();
+    const [nameLeader, setNameLeader] = useState("");
 
 
 
@@ -23,6 +24,31 @@ function PageBaoCaoCongViec() {
     const idUserJson = localStorage.getItem('idUser');
     const idUser = JSON.parse(idUserJson);
 
+    const getGroups = async (listIdGroup) => {
+        console.log(listIdGroup);
+        for (let index = 0; index < listIdGroup.length; index++) {
+            const idGroup = listIdGroup[index];
+            const baseurl = 'http://' + post + '/getGroup/?idGroup=' + idGroup;
+            const response = await axios.get(baseurl);
+            let listIdUser = JSON.parse(response.data[0].nhanviennhom);
+            for (let i = 0; i < listIdUser.length; i++) {
+                const idUserElement = listIdUser[i];
+                if (idUserElement == idUser) {
+                    getLeaderWorkObject(JSON.parse(response.data[0].nguoiquanlyduan));
+                }
+            }
+        }
+
+    }
+    const getLeaderWorkObject = async (idLeader) => {
+        const baseurl = 'http://' + post + '/getAccount/?idUser=' + idLeader;
+        const response = await axios.get(baseurl);
+        console.log(response.data[0]);
+        if (response.data[0] != null) {
+            setNameLeader(response.data[0].ten + " / Email: " + response.data[0].email);
+        }
+    }
+
     const getWorkObjects = async () => {
 
         var baseUrl = (window.location).href; // You can also use document.URL
@@ -30,13 +56,15 @@ function PageBaoCaoCongViec() {
         setIdWorkUserTag(idWorkUserTag)
         let date = new Date();
         var readableDate = "" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + ""
-        setDate(readableDate)
+        setDate(date.toString())
         const baseurl = 'http://' + post + '/getWorkUserTag/?idWorkTag=' + idWorkUserTag;
         const response = await axios.get(baseurl);
         var element = response.data[0]
         setIdWork(element.idWork);
         const baseurlWork = 'http://' + post + '/getWorkObjects/?idWork=' + element.idWork;
         const responseWork = await axios.get(baseurlWork);
+
+        getGroups(JSON.parse(responseWork.data[0].idGroup))
         // check validate deadline set status
         var dateDeadlinefrom = new Date(responseWork.data[0].deadlineFrom);
         var dateDeadlineTo = new Date(responseWork.data[0].deadlineTo);
@@ -123,58 +151,58 @@ function PageBaoCaoCongViec() {
 
 
         if (arrayWork.status != 1) {
-          if( arrayWork.status != 3){
-            if(file == ""){
-                axios.post('http://' + post + '/uploadReportWorkNoImage', {
+            if (arrayWork.status != 3) {
+                if (file == "") {
+                    axios.post('http://' + post + '/uploadReportWorkNoImage', {
 
-                            data: {
-                                stateReport: 1,
-                                idUser:idUser,
-                                idWorkUserTag: idWorkUserTag,
-                                dateReport: dateToday,
-                                workDone: workDone,
-                                workInprogress: workInProgress,
-                                workToto: workToto,
-                                workQuestions: workQuestions,
-                                nameFile: "NO_NAME_FILE",
-                            },file
+                        data: {
+                            stateReport: 1,
+                            idUser: idUser,
+                            idWorkUserTag: idWorkUserTag,
+                            dateReport: dateToday,
+                            workDone: workDone,
+                            workInprogress: workInProgress,
+                            workToto: workToto,
+                            workQuestions: workQuestions,
+                            nameFile: "NO_NAME_FILE",
+                        }, file
 
-                        }).then(response => {
-                            if (response.data = 'ok') {
-                                console.log("Upload successful");
+                    }).then(response => {
+                        if (response.data = 'ok') {
+                            console.log("Upload successful");
 
                             alert("Báo cáo công việc thành công!")
-                            }
-                        });
-            }else{
-                const formdata = new FormData();
+                        }
+                    });
+                } else {
+                    const formdata = new FormData();
 
-                formdata.append("file", file);
-                formdata.append("stateReport", 1);
-                formdata.append("idUser",  idUser);
-                formdata.append("idWorkUserTag",  idWorkUserTag);
-                formdata.append("dateReport",  dateToday);
-                formdata.append("workDone",  workDone);
-                formdata.append("workInprogress",  workInProgress);
-                formdata.append("workToto",  workToto);
-                formdata.append("workQuestions",  workQuestions);
+                    formdata.append("file", file);
+                    formdata.append("stateReport", 1);
+                    formdata.append("idUser", idUser);
+                    formdata.append("idWorkUserTag", idWorkUserTag);
+                    formdata.append("dateReport", dateToday);
+                    formdata.append("workDone", workDone);
+                    formdata.append("workInprogress", workInProgress);
+                    formdata.append("workToto", workToto);
+                    formdata.append("workQuestions", workQuestions);
 
 
-                console.log(formdata);
-                axios.post('http://' + post + '/uploadReportImage', formdata
-                ).then(response => {
-                    if (response.data = 'ok') {
-                        console.log("Upload successful");
+                    console.log(formdata);
+                    axios.post('http://' + post + '/uploadReportImage', formdata
+                    ).then(response => {
+                        if (response.data = 'ok') {
+                            console.log("Upload successful");
 
-                    alert("Báo cáo công việc thành công!")
-                    }
-                });
+                            alert("Báo cáo công việc thành công!")
+                        }
+                    });
+                }
+            } else {
+                alert("Công việc đã Fail, không thể báo cáo, liên hệ với Admin!!")
             }
-          }else{
-            alert("Công việc đã Fail, không thể báo cáo, liên hệ với Admin!!")
-          }
 
-        }else{
+        } else {
             alert("Công việc đã xong, không thể báo cáo hoàn tất!!")
         }
     }
@@ -182,40 +210,40 @@ function PageBaoCaoCongViec() {
 
 
         if (arrayWork.status != 1) {
-            if(file == ""){
+            if (file == "") {
                 axios.post('http://' + post + '/uploadReportWorkNoImage', {
 
-                            data: {
-                                stateReport: arrayWork.status,
-                                idUser:idUser,
-                                idWorkUserTag: idWorkUserTag,
-                                dateReport: dateToday,
-                                workDone: workDone,
-                                workInprogress: workInProgress,
-                                workToto: workToto,
-                                workQuestions: workQuestions,
-                                nameFile: "NO_NAME_FILE",
-                            },file
+                    data: {
+                        stateReport: arrayWork.status,
+                        idUser: idUser,
+                        idWorkUserTag: idWorkUserTag,
+                        dateReport: dateToday,
+                        workDone: workDone,
+                        workInprogress: workInProgress,
+                        workToto: workToto,
+                        workQuestions: workQuestions,
+                        nameFile: "NO_NAME_FILE",
+                    }, file
 
-                        }).then(response => {
-                            if (response.data = 'ok') {
-                                console.log("Upload successful");
+                }).then(response => {
+                    if (response.data = 'ok') {
+                        console.log("Upload successful");
 
-                            alert("Báo cáo công việc thành công!")
-                            }
-                        });
-            }else{
+                        alert("Báo cáo công việc thành công!")
+                    }
+                });
+            } else {
                 const formdata = new FormData();
 
                 formdata.append("file", file);
-                formdata.append("stateReport",  arrayWork.status);
+                formdata.append("stateReport", arrayWork.status);
                 formdata.append("idUser", idUser);
-                formdata.append("idWorkUserTag",  idWorkUserTag);
-                formdata.append("dateReport",  dateToday);
-                formdata.append("workDone",  workDone);
-                formdata.append("workInprogress",  workInProgress);
-                formdata.append("workToto",  workToto);
-                formdata.append("workQuestions",  workQuestions);
+                formdata.append("idWorkUserTag", idWorkUserTag);
+                formdata.append("dateReport", dateToday);
+                formdata.append("workDone", workDone);
+                formdata.append("workInprogress", workInProgress);
+                formdata.append("workToto", workToto);
+                formdata.append("workQuestions", workQuestions);
 
 
                 console.log(formdata);
@@ -224,14 +252,14 @@ function PageBaoCaoCongViec() {
                     if (response.data = 'ok') {
                         console.log("Upload successful");
 
-                            alert("Báo cáo công việc thành công!")
+                        alert("Báo cáo công việc thành công!")
                     }
                 });
             }
-        //
+            //
 
 
-        }else{
+        } else {
             alert("Công việc đã xong, không thể báo cáo tiến độ!!")
         }
     }
@@ -262,7 +290,7 @@ function PageBaoCaoCongViec() {
                                 Thời gian (Deadline)
                             </p>
                             <p className='info-content-timeOut'>
-                                {timeFrom} - {timeTo}
+                                {new Date(timeFrom).toDateString()} - {new Date(timeTo).toDateString()}
                             </p>
                         </div>
                     </div>
@@ -270,11 +298,11 @@ function PageBaoCaoCongViec() {
                         <div className='status-left'>
                             <div>
                                 <p className='status-title'>Hôm nay:</p>
-                                <p>{dateToday}</p>
+                                <p>{new Date(dateToday).toLocaleString().replace(",","").replace(/:.. /," ")}</p>
                             </div>
                             <div>
-                                <p className='status-title'>Trạng thái:</p>
-                                <p style={{ color: '#19B131', fontWeight: '600' }}> Good</p>
+                                <p className='status-title'>Quản lý dự án:</p>
+                                <p style={{ color: '#19B131', fontWeight: '600' }}>{nameLeader}</p>
                             </div>
                         </div>
                         <div className='status-right'>
@@ -327,11 +355,11 @@ function PageBaoCaoCongViec() {
                 </div>
 
                 <div className="contai-btn_submit-bao_cao_cong_viec">
-                    <div style={{ userSelect:'none' ,color: '#FFC430' ,opacity:arrayWork.status == 1 ? '0.5':'1' ,cursor: arrayWork.status != 1 ?'pointer' : 'no-drop' }} className='btn-submit-progress' onClick={() => submidReport()}>
+                    <div style={{ userSelect: 'none', color: '#FFC430', opacity: arrayWork.status == 1 ? '0.5' : '1', cursor: arrayWork.status != 1 ? 'pointer' : 'no-drop' }} className='btn-submit-progress' onClick={() => submidReport()}>
                         BÁO CÁO TIẾN ĐỘ
                     </div>
                     <span className='border-line' />
-                    <div style={{userSelect:'none' ,color: '#19B131',opacity: arrayWork.status != 1 && arrayWork.status != 3 ? '1':'0.5' ,cursor: (arrayWork.status != 1 && arrayWork.status != 3 ?'pointer' : 'no-drop')  }} className='btn-submit-complete' onClick={() => submidComplete()}>
+                    <div style={{ userSelect: 'none', color: '#19B131', opacity: arrayWork.status != 1 && arrayWork.status != 3 ? '1' : '0.5', cursor: (arrayWork.status != 1 && arrayWork.status != 3 ? 'pointer' : 'no-drop') }} className='btn-submit-complete' onClick={() => submidComplete()}>
                         BÁO CÁO HOÀN TẤT
                     </div>
                 </div>

@@ -15,15 +15,60 @@ function DetailProject() {
     const [dateToday, setDate] = useState();
     var baseUrl = (window.location).href; // You can also use document.URL
     var idWork = baseUrl.substring(baseUrl.lastIndexOf('=') + 1);
+    const [nameLeader, setNameLeader] = useState("");
+    const confirmDeleteWorkObject = () => {
+        let text = "Bạn có muốn xác nhận muốn xóa dự án này?";
+        if (window.confirm(text) == true) {
+            text = "Đồng ý";
+            deleteWorkObject();
+            deleteWorkUserTag();
+            window.location.href = 'http://localhost:3006/danh-sach-du-an';
+        } else {
+            text = "Hủy!";
 
+        }
+    }
+    const deleteWorkObject = async () => {
+        const baseurl = 'http://' + post + '/destroyWorkObject/?idWork=' + idWork;
+        const response = await axios.get(baseurl);
+    }
+    const deleteWorkUserTag = async () => {
+        const baseurl = 'http://' + post + '/destroyWorkUserTags/?idWork=' + idWork;
+        const response = await axios.get(baseurl);
+
+    }
     const getWork = async () => {
         const baseurl = 'http://' + post + '/getWorkObjects/?idWork=' + idWork;
         const response = await axios.get(baseurl);
         var element = response.data[0];
         setWork(element);
+        console.log(element);
+        getGroups(JSON.parse(element.idGroup))
         let date = new Date();
         var readableDate = "" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + ""
         setDate(readableDate)
+    }
+    const getGroups = async (listIdGroup) => {
+        console.log(listIdGroup);
+        for (let index = 0; index < listIdGroup.length; index++) {
+            const idGroup = listIdGroup[index];
+            const baseurl = 'http://' + post + '/getGroup/?idGroup=' + idGroup;
+            const response = await axios.get(baseurl);
+            let listIdUser = JSON.parse(response.data[0].nhanviennhom);
+            for (let i = 0; i < listIdUser.length; i++) {
+                const idUserElement = listIdUser[i];
+                getLeaderWorkObject(JSON.parse(response.data[0].nguoiquanlyduan));
+            }
+        }
+
+    }
+    const getLeaderWorkObject = async (idLeader) => {
+        const baseurl = 'http://' + post + '/getAccount/?idUser=' + idLeader;
+        const response = await axios.get(baseurl);
+        console.log(response.data[0]);
+        if (response.data[0] != null) {
+            setNameLeader(...nameLeader, " / " + response.data[0].ten);
+        }
     }
 
     const getWorkUserTagsWhereIdWork = async () => {
@@ -103,7 +148,7 @@ function DetailProject() {
                                 Thời gian (Deadline)
                             </p>
                             <p className='info-content-timeOut'>
-                                {work.deadlineFrom} - {work.deadlineTo}
+                                {new Date(work.deadlineFrom).toDateString()} - {new Date(work.deadlineTo).toDateString()}
                             </p>
                         </div>
                     </div>
@@ -111,11 +156,11 @@ function DetailProject() {
                         <div className='status-left'>
                             <div>
                                 <p className='status-title'>Hôm nay:</p>
-                                <p>{dateToday}</p>
+                                <p>{new Date().toLocaleString().replace(",", "").replace(/:.. /, " ")}</p>
                             </div>
                             <div>
-                                <p className='status-title'>Trạng thái:</p>
-                                <p style={{ color: '#19B131', fontWeight: '600' }}> Good</p>
+                                <p className='status-title'>Quản lý dự án:</p>
+                                <p style={{ color: '#19B131', fontWeight: '600' }}>{nameLeader}</p>
                             </div>
                         </div>
 
@@ -140,16 +185,16 @@ function DetailProject() {
                             </div>
                             <div className="tbody">
                                 {listWorkUserTags.map((element) =>
-                                <a href={'http://localhost:3006/quan-ly-danh-sach-bao-cao-du-an?idWorkUserTag='+ element.idWorkUserTag} style={{ textDecoration: 'none' }} >
-                                    <div className="tbody-element" >
-                                        <td style={{ textAlign: 'left' }}>{element.nameUser}</td>
-                                        <td style={{ textAlign: 'center' }}>{element.position}</td>
-                                        <td style={{ textAlign: 'center' }}>{element.sumReport }</td>
-                                        <td style={{ textAlign: 'center' }}>{element.reportToday ? "Success" : "Fail"}</td>
-                                        <td><div style={{ backgroundColor: element.status == 0 ? '#A162F7' : element.status == 1 ? '#19B131' :  element.status == 2 ? '#FFC430' : '#FF424F' }} className='box-color_status'></div></td>
-                                        <td style={{ textAlign: 'center' }}><img src={icoShowDetails} /></td>
-                                    </div>
-                                </a>
+                                    <a href={'http://localhost:3006/quan-ly-danh-sach-bao-cao-du-an?idWorkUserTag=' + element.idWorkUserTag} style={{ textDecoration: 'none' }} >
+                                        <div className="tbody-element" >
+                                            <td style={{ textAlign: 'left' }}>{element.nameUser}</td>
+                                            <td style={{ textAlign: 'center' }}>{element.position}</td>
+                                            <td style={{ textAlign: 'center' }}>{element.sumReport}</td>
+                                            <td style={{ textAlign: 'center' }}>{element.reportToday ? "Success" : "Fail"}</td>
+                                            <td><div style={{ backgroundColor: element.status == 0 ? '#A162F7' : element.status == 1 ? '#19B131' : element.status == 2 ? '#FFC430' : '#FF424F' }} className='box-color_status'></div></td>
+                                            <td style={{ textAlign: 'center' }}><img src={icoShowDetails} /></td>
+                                        </div>
+                                    </a>
 
                                 )}
                             </div>
@@ -160,12 +205,12 @@ function DetailProject() {
                 </div>
 
                 <div className="contai-btn_submit-bao_cao_cong_viec">
-                    <div className='btn-submit-progress' >
-                        BÁO CÁO TIẾN ĐỘ
+                    <div onClick={() => confirmDeleteWorkObject()} style={{ borderRadius: '5px', backgroundColor: '#FD4438', color: "#ffff" }}>
+                        XÓA DỰ ÁN
                     </div>
                     <span className='border-line' />
-                    <div className='btn-submit-complete'>
-                        BÁO CÁO HOÀN TẤT
+                    <div style={{ borderRadius: '5px', backgroundColor: '#FFC430', color: "#ffff" }} >
+                        SỬA DỰ ÁN
                     </div>
                 </div>
 
