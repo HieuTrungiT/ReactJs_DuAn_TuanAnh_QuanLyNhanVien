@@ -1,0 +1,17 @@
+.thead_Manager-Keepings {
+    display: grid;
+    grid-template-columns: 14.2% 14.2% 14.2% 14.2% 10.2% 28.2% 4.2%;
+}
+.thead_Manager-Keepings th {
+    width: 100%;
+}
+.tbody-manager-element-Keepings {
+    display: grid;
+    grid-template-columns: 14.2% 14.2% 14.2% 14.2% 10.2% 28.2% 4.2%;
+}
+.tbody-manager-element-Keepings td {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

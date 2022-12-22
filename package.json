@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "chart.js": "^4.0.1",
-    "react-chartjs-2": "^5.0.1",
-    "react-vis": "^0.3.4"
-  }
-}
