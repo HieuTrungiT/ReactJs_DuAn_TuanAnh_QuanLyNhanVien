@@ -958,7 +958,7 @@ app.post('/UploadWork', (req, res) => {
 })
 app.post('/UpdateWork', (req, res) => {
   const data = req.body
-  var sql = "UPDATE `work_project` SET `nameWork`='"+data.data.nameWork+"',`deadlineTo`='"+data.data.deadlineTo+"',`deadlineFrom`='"+data.data.deadlineFrom+"',`group`='" + data.data.group + "',`criticalLevel`='" + data.data.criticalLevel + "',`idPorjectType`='"+data.data.idPorjectType+"',`idGroup`='[" + data.data.idGroup + "]' WHERE id=" + data.data.idWork;
+  var sql = "UPDATE `work_project` SET `nameWork`='"+data.data.nameWork+"',`deadlineTo`='"+data.data.deadlineTo+"',`deadlineFrom`='"+data.data.deadlineFrom+"',`criticalLevel`='" + data.data.criticalLevel + "',`idPorjectType`='"+data.data.idPorjectType+"' WHERE id=" + data.data.idWork;
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
