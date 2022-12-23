@@ -13,7 +13,7 @@ function PageCongViec() {
 
     const idUserJson = localStorage.getItem('idUser');
     const idUser = JSON.parse(idUserJson);
-
+console.log(idUser);
     // Get list work user tag
     const getWorkUserTags = async () => {
         const baseurl = 'http://' + post + '/getWorkUserTags/?idUser='+idUser;

@@ -27,7 +27,7 @@ function LoginRight() {
         {
             state.jobs.email != null && navigate("/")
         }
-        {Home != null && navigate("/")}
+        { Home != null && navigate("/") }
     }, [state]);
 
     //Hàm Submit
@@ -40,17 +40,19 @@ function LoginRight() {
 
         axios.post(API_LOGIN, values)
             .then(response => {
+                console.log(response);
                 if (response.data.success === true && response.data.message === "USER!") {
                     values.admin = "false";
                     dispatch(SetJobLogin(values))
+                    localStorage.setItem("idUser", response.data.idUser)
                 } else if (response.data.success === true && response.data.message === "ADMIN!") {
                     values.admin = "true";
+                    localStorage.setItem("idUser", response.data.idUser)
                     dispatch(SetJobLogin(values))
                 } else if (response.data.message === "Ban!") {
                     ErrorAccountBan()
                 } else if (response.data.message === "LOCK!") {
                     ErrorAccountLOCK()
-
                 } else {
                     ErrorLogin()
                 }
@@ -108,7 +110,7 @@ function LoginRight() {
                     sitekey="6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP"
                 /> */}
                 <ReCAPTCHA className="ReCAPTCHA"
-                sitekey='6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP'>
+                    sitekey='6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP'>
 
                 </ReCAPTCHA>
             </Form.Item>

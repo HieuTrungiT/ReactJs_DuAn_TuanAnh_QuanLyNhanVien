@@ -11,7 +11,7 @@ import Alert from 'react-bootstrap/Alert';
 function PageDiemDanh() {
     const [dateToday, setDate] = useState();
     const [hoursNow, setHoursNow] = useState();
-    const [timeOut, setTimeOut] = useState(12); // set giá trị thời gian tan ca
+    const [timeOut, setTimeOut] = useState(0); // set giá trị thời gian tan ca
     const [checkOut, setCheckOut] = useState(true);
     const [blNotOffDay, setBlNotOffDay] = useState(true);
     const [dateOffWorkTo, setDateOffWorkTo] = useState(null);
@@ -26,7 +26,7 @@ function PageDiemDanh() {
     const [isShowAlert, setIsCheckShowAlert] = useState(false)
     const idUserJson = localStorage.getItem('idUser');
     const idUser = JSON.parse(idUserJson);
-
+console.log(idUser);
 
 
     // Form điểm danh
@@ -48,8 +48,10 @@ function PageDiemDanh() {
                 if (hoursNow >= timeOut && hoursNow <= timeOut + 1) {
                     if (blNotOffDay) {
                         if (checkOut) {
+
                             if (mediaFile == null) {
-                                axios.post('http://' + post + '/uploadTimekeepingNoImage', { data: { dateToday: dateToday, notes: notes, nameFile: "NO_NAME_FILE" } })
+                                console.log(idUser);
+                                axios.post('http://' + post + '/uploadTimekeepingNoImage', { data: { idUser:idUser,dateToday: dateToday, notes: notes, nameFile: "NO_NAME_FILE" } })
                                     .then(response => {
                                         if (response.data = 'ok') {
                                             getDateToday()
@@ -58,6 +60,7 @@ function PageDiemDanh() {
                                             setContentAlert("Điểm danh thành công")
                                             setVariantAlert('success');
                                             setHiddenAlert()
+                                            setCheckOut(false);
                                         }
                                     });
                             } else {
@@ -78,6 +81,7 @@ function PageDiemDanh() {
                                             setContentAlert("Điểm danh thành công")
                                             setVariantAlert('success');
                                             setHiddenAlert()
+                                            setCheckOut(false);
                                         }
                                     });
                             }
@@ -249,6 +253,7 @@ function PageDiemDanh() {
     const getTimekeeping = async () => {
         const baseurl = 'http://' + post + '/getTimekeeping/?idUser=' + idUser;
         const response = await axios.get(baseurl);
+        console.log(response);
         setListTimekeeping(response.data)
 
         response.data.map((item) => {
@@ -387,7 +392,7 @@ function PageDiemDanh() {
 
                                     {item.status == 0 ? <td className="status_OK">Điểm danh</td> : <td className="status_Fail">Xin vắng</td>}
 
-                                    {item.accuracy == 0 ? <td className="accuracy_Waiting">Đang chờ</td> :item.accuracy == 1 ? <td className="accuracy_Confirm">Đã xác nhận</td> :<td style={{color:'#FD4438'}}>Từ chối</td>}
+                                    {item.accuracy == 0 ? <td className="accuracy_Waiting">Đang chờ</td> : item.accuracy == 1 ? <td className="accuracy_Confirm">Đã xác nhận</td> : <td style={{ color: '#FD4438' }}>Từ chối</td>}
 
                                 </div>
                             )}

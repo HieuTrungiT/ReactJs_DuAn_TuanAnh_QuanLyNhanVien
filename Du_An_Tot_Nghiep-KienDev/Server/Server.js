@@ -115,7 +115,10 @@ app.post("/dangnhap", (req, res) => {
     if (err) {
       res.send({ success: false, message: "Database không có kết nối!" });
     }
+
     if (result.length > 0) {
+      let idUser  = result[0].id;
+      console.log();
       var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND lockacc = '9999' ";
       con.query(sql, function (err, result, fields) {
         if (result.length > 0) {
@@ -129,18 +132,20 @@ app.post("/dangnhap", (req, res) => {
             else {
               var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND phanquyen = '9999' ";
               con.query(sql, function (err, result, fields) {
+
                 if (result.length > 0) {
                   var sql = "UPDATE account SET timelogin = '" + req.body.dateTime + "' where email = '" + req.body.email + "'";
                   con.query(sql, function (err, result, fields) {
                     if (err) throw err;
-                    res.send({ success: true, message: "ADMIN!" });
+                    res.send({ idUser:idUser,success: true, message: "ADMIN!" });
                   });
                 }
                 else {
                   var sql = "UPDATE account SET timelogin = '" + req.body.dateTime + "' where email = '" + req.body.email + "'";
                   con.query(sql, function (err, result, fields) {
+
                     if (err) throw err;
-                    res.send({ success: true, message: "USER!" });
+                    res.send({ idUser:idUser,success: true, message: "USER!" });
                   });
                 }
               });
@@ -835,7 +840,7 @@ app.post('/deletebangchamcong', (req, res) => {
 // Timekeeping
 app.post('/uploadTimekeepingNoImage', (req, res) => {
 
-  var sql = "INSERT INTO `timekeepings`(`date`,`notes`,`nameImg`,`idUser`) VALUES ('" + req.body.data.dateToday + "','" + req.body.data.notes + "','" + req.body.data.nameFile + "','17')";
+  var sql = "INSERT INTO `timekeepings`(`date`,`notes`,`nameImg`,`idUser`) VALUES ('" + req.body.data.dateToday + "','" + req.body.data.notes + "','" + req.body.data.nameFile + "','"+req.body.data.idUser+"')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
