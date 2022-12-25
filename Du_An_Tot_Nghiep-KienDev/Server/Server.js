@@ -117,7 +117,7 @@ app.post("/dangnhap", (req, res) => {
     }
 
     if (result.length > 0) {
-      let idUser  = result[0].id;
+      let idUser = result[0].id;
       console.log();
       var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND lockacc = '9999' ";
       con.query(sql, function (err, result, fields) {
@@ -137,7 +137,7 @@ app.post("/dangnhap", (req, res) => {
                   var sql = "UPDATE account SET timelogin = '" + req.body.dateTime + "' where email = '" + req.body.email + "'";
                   con.query(sql, function (err, result, fields) {
                     if (err) throw err;
-                    res.send({ idUser:idUser,success: true, message: "ADMIN!" });
+                    res.send({ idUser: idUser, success: true, message: "ADMIN!" });
                   });
                 }
                 else {
@@ -145,7 +145,7 @@ app.post("/dangnhap", (req, res) => {
                   con.query(sql, function (err, result, fields) {
 
                     if (err) throw err;
-                    res.send({ idUser:idUser,success: true, message: "USER!" });
+                    res.send({ idUser: idUser, success: true, message: "USER!" });
                   });
                 }
               });
@@ -840,7 +840,7 @@ app.post('/deletebangchamcong', (req, res) => {
 // Timekeeping
 app.post('/uploadTimekeepingNoImage', (req, res) => {
 
-  var sql = "INSERT INTO `timekeepings`(`date`,`notes`,`nameImg`,`idUser`) VALUES ('" + req.body.data.dateToday + "','" + req.body.data.notes + "','" + req.body.data.nameFile + "','"+req.body.data.idUser+"')";
+  var sql = "INSERT INTO `timekeepings`(`date`,`notes`,`nameImg`,`idUser`) VALUES ('" + req.body.data.dateToday + "','" + req.body.data.notes + "','" + req.body.data.nameFile + "','" + req.body.data.idUser + "')";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
@@ -958,7 +958,7 @@ app.post('/UploadWork', (req, res) => {
 })
 app.post('/UpdateWork', (req, res) => {
   const data = req.body
-  var sql = "UPDATE `work_project` SET `nameWork`='"+data.data.nameWork+"',`deadlineTo`='"+data.data.deadlineTo+"',`deadlineFrom`='"+data.data.deadlineFrom+"',`criticalLevel`='" + data.data.criticalLevel + "',`idPorjectType`='"+data.data.idPorjectType+"' WHERE id=" + data.data.idWork;
+  var sql = "UPDATE `work_project` SET `nameWork`='" + data.data.nameWork + "',`deadlineTo`='" + data.data.deadlineTo + "',`deadlineFrom`='" + data.data.deadlineFrom + "',`criticalLevel`='" + data.data.criticalLevel + "',`idPorjectType`='" + data.data.idPorjectType + "' WHERE id=" + data.data.idWork;
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
@@ -1022,6 +1022,12 @@ app.get('/getWorkReportWhereIdUser', function (req, res) {
     res.send(result);
   });
 });
+app.post('/postWorkReportWhereIdUser', function (req, res) {
+  con.query("SELECT * FROM `work_report` WHERE idUser = '" + req.body.data.idUser + "' and idWorkUserTag='" + req.body.data.idWorkUserTag + "'order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
 // get work_report where id
 app.get('/getWorkReportWhereId', function (req, res) {
@@ -1032,7 +1038,7 @@ app.get('/getWorkReportWhereId', function (req, res) {
 });
 app.post('/UpdateStateUserTag', function (req, res) {
   console.log(req.body.data.idUserTag);
-  con.query("UPDATE `work_users_tag` SET `status`='"+req.body.data.State+"' WHERE id =" + req.body.data.idUserTag, function (err, result, fields) {
+  con.query("UPDATE `work_users_tag` SET `status`='" + req.body.data.State + "' WHERE id =" + req.body.data.idUserTag, function (err, result, fields) {
     if (err) throw err;
     res.send(result);
   });

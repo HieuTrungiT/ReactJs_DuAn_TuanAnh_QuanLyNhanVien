@@ -11,7 +11,7 @@ import Alert from 'react-bootstrap/Alert';
 function PageDiemDanh() {
     const [dateToday, setDate] = useState();
     const [hoursNow, setHoursNow] = useState();
-    const [timeOut, setTimeOut] = useState(0); // set giá trị thời gian tan ca
+    const [timeOut, setTimeOut] = useState(22); // set giá trị thời gian tan ca
     const [checkOut, setCheckOut] = useState(true);
     const [blNotOffDay, setBlNotOffDay] = useState(true);
     const [dateOffWorkTo, setDateOffWorkTo] = useState(null);
@@ -44,7 +44,7 @@ console.log(idUser);
 
         let day = new Date().getDay();
         setTimeout(function () {
-            if (day >= 2) {
+            // if (day >= 2) {
                 if (hoursNow >= timeOut && hoursNow <= timeOut + 1) {
                     if (blNotOffDay) {
                         if (checkOut) {
@@ -71,7 +71,7 @@ console.log(idUser);
                                 formdata.append("notes", notes);
                                 formdata.append("idUser", idUser);
 
-
+                                console.log(formdata);
                                 axios.post('http://' + post + '/uploadTimekeepingImage', formdata)
                                     .then(response => {
                                         if (response.data = 'ok') {
@@ -107,12 +107,12 @@ console.log(idUser);
                     setHiddenAlert()
                 }
 
-            } else {
-                setIsCheckShowAlert(true);
-                setContentAlert("Thao tác không hợp lệ với ngày làm việc.")
-                setVariantAlert('danger');
-                setHiddenAlert()
-            }
+            // } else {
+            //     setIsCheckShowAlert(true);
+            //     setContentAlert("Thao tác không hợp lệ với ngày làm việc.")
+            //     setVariantAlert('danger');
+            //     setHiddenAlert()
+            // }
         }, 1000);
     }
     const changeHandler = (event) => {
@@ -139,13 +139,14 @@ console.log(idUser);
     const submitOffWork = () => {
         // validate
         var dateNow = new Date();
-        var dateOffTo = new Date(dateOffWorkTo);
-        var dateOrrFrom = new Date(dateOffWorkFrom);
+        var dateOffTo = new Date(dateOffWorkTo); // ngày bắt đầu nghỉ
+        var dateOrrFrom = new Date(dateOffWorkFrom); // ngày kết thúc nghỉ
         console.log(dateOffWorkTo);
         if (dateOffWorkTo != null) {
-            if (dateOffTo.getFullYear() >= dateNow.getFullYear()) {
-                if ((dateOffTo.getMonth() + 1) >= (dateNow.getMonth() + 1)) {
-                    if (dateOffTo.getDate() >= dateNow.getDate()) {
+            if (dateOffTo.getFullYear() >= dateNow.getFullYear()) { // năm bắt đầu nghỉ 'lớn hơn hoặc bằng 'năm hiện tại
+                if ((dateOffTo.getMonth() + 1) >= (dateNow.getMonth() + 1)) { // tháng bắt đầu nghỉ phải lớn hơn thamhs hiện tại + 1
+                    if (dateOffTo.getDate() >= dateNow.getDate()) { // ngày bắt đầu nghỉ phải lớn hơn ngày hiện tại
+                        // new Date('11/10/2021') <= new Date();
                         if (dateOffWorkFrom != null) {
                             if (dateOrrFrom.getFullYear() >= dateOffTo.getFullYear()) {
                                 if ((dateOrrFrom.getMonth() + 1) >= (dateOffTo.getMonth() + 1)) {
@@ -343,6 +344,7 @@ console.log(idUser);
                                 ĐIỂM DANH
                             </button>
                         </div>
+
 
                     </div>
                 </div>

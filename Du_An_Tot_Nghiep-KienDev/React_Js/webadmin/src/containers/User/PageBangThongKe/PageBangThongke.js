@@ -53,74 +53,74 @@ function PageBangThongKe() {
     }
 
 
-    const GetListLevelOfWork = () => {
-        // Lấy danh sách tại Date from "Ngày thấp nhât"
-        // Lấy danh sách tại Date to ngày "cao nhất"
-        var dateMinFrom;
-        var dateMaxTo;
-        // Cách lấy ngày thấp nhất tại form
-        // Đặt biến tạm dateMinFrom;
+    // const GetListLevelOfWork = () => {
+    //     // Lấy danh sách tại Date from "Ngày thấp nhât"
+    //     // Lấy danh sách tại Date to ngày "cao nhất"
+    //     var dateMinFrom;
+    //     var dateMaxTo;
+    //     // Cách lấy ngày thấp nhất tại form
+    //     // Đặt biến tạm dateMinFrom;
 
-        for (var i = 0; i < arrayListWork.length; i++) {
+    //     for (var i = 0; i < arrayListWork.length; i++) {
 
-            let element = arrayListWork[i].workObject;
-            var dateFromTemb = new Date(element.deadlineFrom);
-            var dateToTemb = new Date(element.deadlineTo);
-            if (dateMinFrom == null) {
-                dateMinFrom = dateFromTemb;
-            }
+    //         let element = arrayListWork[i].workObject;
+    //         var dateFromTemb = new Date(element.deadlineFrom);
+    //         var dateToTemb = new Date(element.deadlineTo);
+    //         if (dateMinFrom == null) {
+    //             dateMinFrom = dateFromTemb;
+    //         }
 
-            if (dateMaxTo == null) {
-                dateMaxTo = dateToTemb;
-            }
+    //         if (dateMaxTo == null) {
+    //             dateMaxTo = dateToTemb;
+    //         }
 
 
-            console.log(element.group);
-            // Kiểm tra ngày from nhỏ nhất
-            if (dateMinFrom > dateFromTemb) {
-                dateMinFrom = dateFromTemb;
-            }
+    //         console.log(element.group);
+    //         // Kiểm tra ngày from nhỏ nhất
+    //         if (dateMinFrom > dateFromTemb) {
+    //             dateMinFrom = dateFromTemb;
+    //         }
 
-            // Kiểm tra ngày from Lớn nhất
-            if (dateMaxTo < dateToTemb) {
-                dateMaxTo = dateToTemb;
-            }
+    //         // Kiểm tra ngày from Lớn nhất
+    //         if (dateMaxTo < dateToTemb) {
+    //             dateMaxTo = dateToTemb;
+    //         }
 
-            // sắp xếp mảng
-            for (var j = i + 1; j < arrayListWork.length; j++) {
-                if (arrayListWork[i].deadlineFrom > arrayListWork[j].deadlineFrom) {
-                    var temp;
-                    temp = arrayListWork[i].deadlineFrom;
-                    arrayListWork[i].deadlineFrom = arrayListWork[j].deadlineFrom
-                    arrayListWork[j].deadlineFrom = temp;
-                }
-            }
-        }
-    }
+    //         // sắp xếp mảng
+    //         for (var j = i + 1; j < arrayListWork.length; j++) {
+    //             if (arrayListWork[i].deadlineFrom > arrayListWork[j].deadlineFrom) {
+    //                 var temp;
+    //                 temp = arrayListWork[i].deadlineFrom;
+    //                 arrayListWork[i].deadlineFrom = arrayListWork[j].deadlineFrom
+    //                 arrayListWork[j].deadlineFrom = temp;
+    //             }
+    //         }
+    //     }
+    // }
 
-    const options = {
-        animationEnabled: true,
-        title: {
-            // text: "Monthly Sales - 2017"
-        },
-        axisX: {
-            valueFormatString: "MMM"
-        },
-        axisY: {
-            // title: "Sales (in USD)",
-            // prefix: "",
-            includeZero: true
-        },
-        data: [{
-            yValueFormatString: "Số lượng công việc: ###",
-            xValueFormatString: "MMMM",
-            // type: "spline",
-            dataPoints: [
-                { y: 2, label: "s" },
-                { y: 2, label: "s" },
-            ]
-        }]
-    }
+    // const options = {
+    //     animationEnabled: true,
+    //     title: {
+    //         // text: "Monthly Sales - 2017"
+    //     },
+    //     axisX: {
+    //         valueFormatString: "MMM"
+    //     },
+    //     axisY: {
+    //         // title: "Sales (in USD)",
+    //         // prefix: "",
+    //         includeZero: true
+    //     },
+    //     data: [{
+    //         yValueFormatString: "Số lượng công việc: ###",
+    //         xValueFormatString: "MMMM",
+    //         // type: "spline",
+    //         dataPoints: [
+    //             { y: 2, label: "s" },
+    //             { y: 2, label: "s" },
+    //         ]
+    //     }]
+    // }
     const optionsPie = {
         exportEnabled: true,
         animationEnabled: true,
@@ -155,7 +155,7 @@ function PageBangThongKe() {
     useEffect(() => {
         if (countCheckReloadData == 0) {
             getWorkUserTags();
-            GetListLevelOfWork();
+            // GetListLevelOfWork();
             countCheckReloadData++;
         }
     }, [])

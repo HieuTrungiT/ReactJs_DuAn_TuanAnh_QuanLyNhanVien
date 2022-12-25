@@ -43,7 +43,6 @@ function DetailProject() {
         const response = await axios.get(baseurl);
         var element = response.data[0];
         setWork(element);
-        console.log(element);
         getGroups(JSON.parse(element.idGroup))
         let date = new Date();
         var readableDate = "" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + ""
@@ -66,7 +65,6 @@ function DetailProject() {
     const getLeaderWorkObject = async (idLeader) => {
         const baseurl = 'http://' + post + '/getAccount/?idUser=' + idLeader;
         const response = await axios.get(baseurl);
-        console.log(response.data[0]);
         if (response.data[0] != null) {
             setNameLeader(...nameLeader, " / " + response.data[0].ten);
         }
@@ -96,31 +94,45 @@ function DetailProject() {
         // console.log(elementUser);
     }
     const getListReport = async (data) => {
-        const baseurl = 'http://' + post + '/getWorkReportWhereIdUser/?idUser=' + data.elementWorkUserTag.idUser;
-        const response = await axios.get(baseurl);
-        var listReport = response.data;
         let sum = 0;
         let blCheckDateReport = false;
-        listReport.map((element) => {
-            sum += 1;
-            var dateReport = new Date(element.dateReport);
-            var dateToday = new Date();
-            if (dateReport == dateToday) {
-                blCheckDateReport = true;
+
+        console.log(data.elementWorkUserTag.id);
+        console.log(data.elementWorkUserTag.idUser);
+        axios.post('http://' + post + '/postWorkReportWhereIdUser', {
+            data: {
+                idUser: data.elementWorkUserTag.idUser,
+                idWorkUserTag: data.elementWorkUserTag.id,
             }
-        })
 
-        var arrWorkUser = await {
-            idUser: data.elementWorkUserTag.idUser,
-            idWorkUserTag: data.elementWorkUserTag.id,
-            sumReport: sum,
-            nameUser: data.elementUser.ten,
-            position: data.elementUser.chucvu,
-            reportToday: blCheckDateReport,
-            status: data.elementWorkUserTag.status,
-        }
+        }).then(response => {
+            var listReport = response.data;
+            console.log(listReport);
+            listReport.map((element) => {
+                sum += 1;
+                var dateReport = new Date(element.dateReport);
+                var dateToday = new Date();
+                if (dateReport == dateToday) {
+                    blCheckDateReport = true;
+                }
+            })
+            console.log(sum);
+            var arrWorkUser =  {
+                idUser: data.elementWorkUserTag.idUser,
+                idWorkUserTag: data.elementWorkUserTag.id,
+                sumReport: sum,
+                nameUser: data.elementUser.ten,
+                position: data.elementUser.chucvu,
+                reportToday: blCheckDateReport,
+                status: data.elementWorkUserTag.status,
+            }
+            setListWorkUserTags(listWorkUserTags => [...listWorkUserTags, arrWorkUser]);
 
-        setListWorkUserTags(listWorkUserTags => [...listWorkUserTags, arrWorkUser]);
+        });
+
+
+
+
     }
 
     useEffect(() => {
@@ -211,7 +223,7 @@ function DetailProject() {
                     </div>
                     <span className='border-line' />
                     <Link to={'/quan-ly-chi-tiet-bao-cao/sua-du-an:idWork=' + idWork}>
-                        <Button style={{ height:'100%',borderRadius: '5px', backgroundColor: '#FFC430', color: "#ffff", padding: '11px' }} >
+                        <Button style={{ height: '100%', borderRadius: '5px', backgroundColor: '#FFC430', color: "#ffff", padding: '11px' }} >
                             SỬA DỰ ÁN
                         </Button>
                     </Link>

@@ -44,16 +44,16 @@ function DetailListReportUser() {
     const SetStateWorkUserTag = async (int) => {
         axios.post('http://' + post + '/UpdateStateUserTag', {
 
-        data: {
-            idUserTag: idWorkUserTag,
-            State: int,
-        }
+            data: {
+                idUserTag: idWorkUserTag,
+                State: int,
+            }
 
-    }).then(response => {
-        if (response.data = 'ok') {
-            console.log("Upload successful");
-        }
-    });
+        }).then(response => {
+            if (response.data = 'ok') {
+                console.log("Upload successful");
+            }
+        });
 
 
     }

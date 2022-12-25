@@ -208,8 +208,9 @@ function PageBaoCaoCongViec() {
     }
     const submidReport = () => {
 
+        // if (arrayWork.status != 1 && arrayWork.status != 3 ) {
 
-        if (arrayWork.status != 1) {
+        if (arrayWork.status != 1 ) {
             if (file == "") {
                 axios.post('http://' + post + '/uploadReportWorkNoImage', {
 
